@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Bob&#39;s Blogs › Socket编程基础</title>
+  <meta name="author" content="Bob Zhang">
+  
+  <meta name="description" content="Record the life and work.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Socket编程基础">
+  <meta property="og:site_name" content="Bob&#39;s Blogs">
+
+  
+    <meta property="og:image" content>
+  
+
+  <link href="/img/BZLogo.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Bob&#39;s Blogs" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-5353535-6']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+</html>
+
+<body>
+  <header id="header"><div class="meta inner">
+  <h1><a href="/">Bob&#39;s Blogs</a></h1>
+  <h2 id="header-h2">一切伟大的思想和行动，都有一个微不足道的开始。</h2>
+  <nav id="main-nav">
+    <ul>
+      
+      <li><a href="/">首页</a></li>
+      
+      <li><a href="/archives">文章归档</a></li>
+      
+      <li><a href="https://github.com/SadCPPCoder">Git</a></li>
+      
+      <li><a href="http://www.cplusplus.com/">友情链接</a></li>
+      
+      <li><a href="/about">关于</a></li>
+      
+      <img class="round_logo" src="/img/user_icon.jpg">
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+</div>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title">Socket编程基础</h1>
+  
+
+      
+      <time datetime="2018-12-02T14:12:21.000Z">2018-12-02</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h1 id="Socket编程之Socket基础"><a href="#Socket编程之Socket基础" class="headerlink" title="Socket编程之Socket基础"></a>Socket编程之Socket基础</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Socket编程主要分为TCP／UDP／SCTP三种，每一种都有各自的优点，所以会根据实际情况决定选用何种Socket。<br>之后会抽取空余时间来开始深入学习Socket编程。</p>
+<p>今天学习的是TCP编程。</p>
+<h2 id="基本流程："><a href="#基本流程：" class="headerlink" title="基本流程："></a>基本流程：</h2><p>TCP基本客户端与服务端的套接字函数：</p>
+<ul>
+<li>Client: <pre><code>* socket
+* connect
+* write/read
+* close.
+</code></pre><a id="more"></a></li>
+<li>Server: <pre><code>* socket
+* bind
+* listen
+* accept
+* read/write
+* close.
+</code></pre></li>
+</ul>
+<p>整个TCP过程，可以参见下图。<br><img src="/2018/12/02/Socket编程基础/socket_process.png"></p>
+<h2 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h2><p>三次握手是指客户端调用connect函数发起连接请求，服务端accept函数响应时，发生的3次数据交换过程。</p>
+<img src="/2018/12/02/Socket编程基础/shake_hands.png"> 
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>简单客户端code例子：<a href="https://github.com/SadCPPCoder/Socket/blob/master/2018.12.02/tcp/add_client.c" target="_blank" rel="noopener">https://github.com/SadCPPCoder/Socket/blob/master/2018.12.02/tcp/add_client.c</a><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// simple client: send two number to server, and the server reply the add result.</span></span><br><span class="line"><span class="comment">// author: SanCPPCoder</span></span><br><span class="line"><span class="comment">// date: 2018.12.02</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;netinet/in.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ADD_SERVER_PORT 	( 8888 )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ADD_SERVER_IP		( <span class="meta-string">"127.0.0.1"</span> )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INPUT_COUNT		( 3 )</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// get the input</span></span><br><span class="line">    <span class="keyword">if</span>( INPUT_COUNT != argc )</span><br><span class="line">    &#123;</span><br><span class="line">        perror( <span class="string">"Error input!\nPlease input like:\n\t\t client numberA numberB\n"</span> );</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">double</span> num[<span class="number">2</span>] = &#123; <span class="number">0.0</span> &#125;;</span><br><span class="line">    num[<span class="number">0</span>] = atof( &amp;argv[<span class="number">1</span>][<span class="number">0</span>] );</span><br><span class="line">    num[<span class="number">1</span>] = atof( &amp;argv[<span class="number">2</span>][<span class="number">0</span>] );</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>( <span class="string">"The input data is [%f] and [%f].\n"</span>, num[<span class="number">0</span>], num[<span class="number">1</span>] );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// socket</span></span><br><span class="line">    <span class="keyword">int</span> client_sock = socket( AF_INET, SOCK_STREAM, <span class="number">0</span> ); <span class="comment">// IPV4, Stream, TCP</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// define the socket address of server</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">server_addr</span>;</span></span><br><span class="line">    bzero( &amp;server_addr, <span class="keyword">sizeof</span>(server_addr) );</span><br><span class="line">    server_addr.sin_family = AF_INET; <span class="comment">// IPV4</span></span><br><span class="line">    server_addr.sin_port = htons( ADD_SERVER_PORT ); <span class="comment">// server port</span></span><br><span class="line">    server_addr.sin_addr.s_addr = inet_addr( ADD_SERVER_IP ); <span class="comment">// server ip</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// connect</span></span><br><span class="line">    <span class="keyword">if</span>( connect( client_sock, (struct sockaddr*)&amp;server_addr, <span class="keyword">sizeof</span>(server_addr) ) &lt; <span class="number">0</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        perror( <span class="string">"Connect to server failed!\n"</span> );</span><br><span class="line">        <span class="comment">// <span class="doctag">TODO:</span> output error information.</span></span><br><span class="line">        close( client_sock );</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// send</span></span><br><span class="line">    <span class="keyword">int</span> send_len = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>( (send_len = send( client_sock, (<span class="keyword">char</span>*)&amp;num, <span class="keyword">sizeof</span>(num), <span class="number">0</span> ) ) &lt;= <span class="number">0</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        perror( <span class="string">"Send data failed!\n"</span> );</span><br><span class="line">        close( client_sock );</span><br><span class="line">        <span class="comment">// <span class="doctag">TODO:</span> resend data</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// recv</span></span><br><span class="line">    <span class="keyword">double</span> result = <span class="number">0.0</span>;</span><br><span class="line">    <span class="keyword">if</span>( (send_len = recv( client_sock, (<span class="keyword">char</span>*)&amp;result, <span class="keyword">sizeof</span>(result), <span class="number">0</span> ) ) &lt; <span class="number">0</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        perror( <span class="string">"receive data failed!\n"</span> );</span><br><span class="line">        close( client_sock );</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>( <span class="string">"Receive the result of [%f] + [%f] = [%f].\n"</span>, num[<span class="number">0</span>], num[<span class="number">1</span>], result );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// close</span></span><br><span class="line">    close( client_sock );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>简单服务端code例子：<a href="https://github.com/SadCPPCoder/Socket/blob/master/2018.12.02/tcp/add_server.c" target="_blank" rel="noopener">https://github.com/SadCPPCoder/Socket/blob/master/2018.12.02/tcp/add_server.c</a><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// simple server: the server get two number from clients, and then reply the add result of the</span></span><br><span class="line"><span class="comment">// two numbers to client.</span></span><br><span class="line"><span class="comment">// author: SadCPPCoder</span></span><br><span class="line"><span class="comment">// date: 2018.12.02</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;netinet/in.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ADD_SERVER_PORT 	( 8888 )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ADD_SERVER_IP		( <span class="meta-string">"127.0.0.1"</span> )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INPUT_COUNT		( 3 )</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// socket</span></span><br><span class="line">    <span class="keyword">int</span> server_sock = socket( AF_INET, SOCK_STREAM, <span class="number">0</span> );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// define socket address</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">server_addr</span>;</span></span><br><span class="line">    bzero( (<span class="keyword">char</span>*)&amp;server_addr, <span class="keyword">sizeof</span>(server_addr) );</span><br><span class="line">    server_addr.sin_family = AF_INET;</span><br><span class="line">    server_addr.sin_port = htons( ADD_SERVER_PORT );</span><br><span class="line">    server_addr.sin_addr.s_addr = htonl( INADDR_ANY );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// bind</span></span><br><span class="line">    <span class="keyword">if</span>( bind( server_sock, (struct sockaddr*)&amp;server_addr, <span class="keyword">sizeof</span>(server_addr)) == <span class="number">-1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        perror( <span class="string">"bind failed!\n"</span> );</span><br><span class="line">        close( server_sock );</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// listen</span></span><br><span class="line">    <span class="keyword">while</span>( <span class="number">1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">	<span class="keyword">if</span>( listen( server_sock, <span class="number">5</span> ) == <span class="number">-1</span> )</span><br><span class="line">	&#123;</span><br><span class="line">	    perror( <span class="string">"listen failed!\n"</span> );</span><br><span class="line">	    close( server_sock );</span><br><span class="line">	    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// client socket</span></span><br><span class="line">	<span class="keyword">double</span> num[<span class="number">2</span>] = &#123; <span class="number">0.0</span> &#125;;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">client_addr</span>;</span></span><br><span class="line">	bzero( (<span class="keyword">char</span>*)&amp;client_addr, <span class="keyword">sizeof</span>(client_addr) );</span><br><span class="line">	<span class="keyword">socklen_t</span> length = <span class="keyword">sizeof</span>(client_addr);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> connect_fd = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>( (connect_fd = accept( server_sock, (struct sockaddr*)&amp;client_addr, &amp;length ) ) &lt; <span class="number">0</span> )</span><br><span class="line">	&#123;</span><br><span class="line">	    perror( <span class="string">"Conncet failed!\n"</span> );</span><br><span class="line">	    close( server_sock );</span><br><span class="line">	    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>( (len = recv( connect_fd, (<span class="keyword">char</span>*)&amp;num, <span class="keyword">sizeof</span>(num), <span class="number">0</span> ) ) &lt; <span class="number">0</span> )</span><br><span class="line">	&#123;</span><br><span class="line">	    perror( <span class="string">"receive data failed!\n"</span> );</span><br><span class="line">	    close( connect_fd );</span><br><span class="line">	    close( server_sock );</span><br><span class="line">	    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">double</span> result = num[<span class="number">0</span>] + num[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">	<span class="comment">// send data to client</span></span><br><span class="line">	<span class="keyword">if</span>( (len = send( connect_fd, (<span class="keyword">char</span>*)&amp;result, <span class="keyword">sizeof</span>(result), <span class="number">0</span> ) ) &lt; <span class="number">0</span> )</span><br><span class="line">	&#123;</span><br><span class="line">	    perror( <span class="string">"send result failed!\n"</span> );</span><br><span class="line">	    close( connect_fd );</span><br><span class="line">	    close( server_sock );</span><br><span class="line">	    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	close( connect_fd );</span><br><span class="line">    &#125;</span><br><span class="line">    close( server_sock );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <footer>
+      <div class="alignleft">
+      
+  
+  <div class="categories">
+    <a href="/categories/技术/">技术</a>, <a href="/categories/技术/linux/">linux</a>, <a href="/categories/技术/linux/网络/">网络</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/Linux/">Linux</a>, <a href="/tags/Socket/">Socket</a>
+  </div>
+
+      </div>
+      <div class="clearfix"></div>
+    </footer>
+    
+  </div>
+</article>
+
+
+<section id="tail">
+    <h3><a>Thank you for reading!</a></h3><br>
+    <h5>
+        一切伟大的思想和行动都有一个微不足道的开始。<br>
+        Any great things in this world, always start with a small beginning.<br><br>
+        生活就像一盒巧克力，你永远不会知道下一块拿到的是哪个。<br>
+        Life is like a box of chocolates, you never know what you are going to get.
+    </h5>
+</section>
+
+</div></div>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer"><div class="inner"><div class="alignleft">
+  <p>
+  
+    &copy; 2019 Bob Zhang
+  
+  </p>
+  <p>
+    <a href="https://github.com/imbyron/hexo-theme-daisy">Theme</a> By <a href="http://googleyixia.com">Byron</a> based on <a href="https://github.com/willerce/hexo-theme-noderce">Noderce</a>.
+  </p>
+
+</div>
+<div class="clearfix"></div></div></footer>
+  <script type="text/javascript">
+
+</script>
+
+</body>
+</html>

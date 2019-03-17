@@ -67,6 +67,39 @@
     <header>
       
   
+    <h1 class="title"><a href="/2019/03/17/巧用std-shared-ptr全局对象释放单例内存/">巧用std::shared_ptr全局对象释放单例内存</a></h1>
+  
+
+      
+      <time datetime="2019-03-17T11:08:24.000Z">2019-03-17</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h2 id="单例内存释放"><a href="#单例内存释放" class="headerlink" title="单例内存释放"></a>单例内存释放</h2><p>在程序中如果存在者单例，同时它们还需要执行delete等操作的话，我们通常在main的末尾去掉用单例的析构函数，或着利用编译器的属性，来设置main函数后执行的函数<figure class="highlight plain"><figcaption><span>```。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">但是如果单例并不是在main函数所在的文件中定义的，那么就还需要想办法在main函数中访问它们，显得相对麻烦。</span><br><span class="line"></span><br><span class="line">## 全局对象析构</span><br><span class="line">在系统中全局对象都是由系统负责析构的，所以全局变量的析构函数，会在程序停止运行后，由系统调用执行。</span><br><span class="line">``` cpp</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">class Test</span><br><span class="line">&#123;</span><br><span class="line">public:</span><br><span class="line">    Test(int a)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; &quot;Test Input: &quot; &lt;&lt; a &lt;&lt; &quot;.&quot; &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ~Test()</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; &quot;Test, destructor!&quot; &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Test test(88);</span><br><span class="line"></span><br><span class="line">int main( void )</span><br><span class="line">&#123;</span><br><span class="line">    std::cout &lt;&lt; &quot;main....&quot; &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+      
+    </div>
+    
+      
+      <footer>
+        <div class="alignleft">
+          <a href="/2019/03/17/巧用std-shared-ptr全局对象释放单例内存/#more" class="more-link">阅读全文 &gt;</a>
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      
+    
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  <div class="post-content">
+    <header>
+      
+  
     <h1 class="title"><a href="/2019/03/17/My-First-Linux-Module/">My First Linux Module</a></h1>
   
 
@@ -145,33 +178,97 @@
     </header>
     <div class="entry">
       
-        <p>#三星Galaxy S8 刷机经验记录</p>
-<p>这段时间用上了三星S8，由于原生系统太耗电，所以萌生了root的想法。写这篇博客记录下这段时间的各种尝试。</p>
-<p>Root过程说明：</p>
-<p>友情提示，道路千万条，安全第一条。开始捣鼓手机之前请一定准备好官方的救砖包。</p>
-<p>1.解锁手机，我手上这台S8，时需要手机端先下载软件（crom1.0.8.apk)进行解锁；</p>
-<p>2.刷入第三方recovery，我选择的TWRP，在TWRP官网上下载了针对我高通CPU版本的刷机包；</p>
-<p>3.三星有自己的刷机工具ODin，到官网下载了最新版的ODin备用；</p>
-<p>4.下载安装S8的驱动，手机驱动可以到官网下载，或者安装豌豆荚这类的应用；</p>
-<p>5.手机关机-&gt;电源+Bixby+音量下-&gt;进入刷机模式-&gt;连接电脑-&gt;打开ODin，识别到手机-&gt;在AP中选择TWRP刷机包-&gt;开始刷机-&gt;手机重启时立马按住电源+Bixby+音量上进入Recovery，避免系统重启后重新覆盖recovery分区；</p>
-<p>6.刷入第三方Kernel（千万记住选择对应手机型号，以及CPU型号），或者第三方Rom来进行刷机。由于我直接刷入Magisk来获取root权限会导致系统无限重启，所以直接使用了第三方的刷机包，刷机包可以到XDA或者GFan论坛查找。</p>
-<p>刷入第三方rom后即获得Root权限，所以开始着手于电池电量优化，安装了绿色守护和黑域并行作业，使用自动运行管理对开机启动进行优化，配合内核调校(需要对应CPU的配置）后，开机一晚耗电从原来的十几个点到现在的一晚上4个点左右，最好成绩是没有掉一个电，简直是奇迹。</p>
-<p>开启免打扰似乎会减少手机射频耗电。</p>
-<p>最后记录下一些方便的工具：</p>
-<p>AppFreezer：免Root冻结</p>
-<p>GScript：脚本执行器</p>
-<p>GSamBatteryMonitor：电池监控</p>
-<p>Package NamesView：包名查看器</p>
-<p>创建快捷方式：可以将activity创建一个快捷方式</p>
-<p>钛备份：可以备份程序和数据，但是恢复的时候我只能一个一个安装</p>
-<p>Kernel Adiutor：内核参数修改，可以修改CPU，GPU，IO，温控等</p>
-<p>EX Kernel Manager：类似内核调校，不过可以将配置保存下来，也可以载入配置。</p>
-<p>补充:</p>
-<p>使用了绿色守护+黑域，一晚上待机的情况下，配合EX KernelManager的省电模式，关闭所有后台后，只耗了一个电(哈哈，不由地露出了欣慰的笑容)。</p>
+        <h1 id="三星Galaxy-S8-刷机经验记录"><a href="#三星Galaxy-S8-刷机经验记录" class="headerlink" title="三星Galaxy S8 刷机经验记录"></a>三星Galaxy S8 刷机经验记录</h1><p>这段时间用上了三星S8，由于原生系统太耗电，所以萌生了root的想法。写这篇博客记录下这段时间的各种尝试。</p>
+<h1 id="Root过程说明："><a href="#Root过程说明：" class="headerlink" title="Root过程说明："></a>Root过程说明：</h1><p>友情提示，<strong><font color="#FF00ff">道路千万条，安全第一条。开始捣鼓手机之前请一定准备好官方的救砖包。</font></strong></p>
+<ol>
+<li><p>解锁手机，我手上这台S8，时需要手机端先下载软件（crom1.0.8.apk)进行解锁；</p>
+</li>
+<li><p>刷入第三方recovery，我选择的TWRP，在TWRP官网上下载了针对我高通CPU版本的刷机包；</p>
+      
+    </li></ol></div>
+    
+      
+      <footer>
+        <div class="alignleft">
+          <a href="/2019/02/26/三星S8-刷机记录/#more" class="more-link">阅读全文 &gt;</a>
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      
+    
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2018/12/02/Socket编程基础/">Socket编程基础</a></h1>
+  
 
       
-    </div>
+      <time datetime="2018-12-02T14:12:21.000Z">2018-12-02</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h1 id="Socket编程之Socket基础"><a href="#Socket编程之Socket基础" class="headerlink" title="Socket编程之Socket基础"></a>Socket编程之Socket基础</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Socket编程主要分为TCP／UDP／SCTP三种，每一种都有各自的优点，所以会根据实际情况决定选用何种Socket。<br>之后会抽取空余时间来开始深入学习Socket编程。</p>
+<p>今天学习的是TCP编程。</p>
+<h2 id="基本流程："><a href="#基本流程：" class="headerlink" title="基本流程："></a>基本流程：</h2><p>TCP基本客户端与服务端的套接字函数：</p>
+<ul>
+<li>Client: <pre><code>* socket
+* connect
+* write/read
+* close.
+</code></pre>
+      
+    </li></ul></div>
     
+      
+      <footer>
+        <div class="alignleft">
+          <a href="/2018/12/02/Socket编程基础/#more" class="more-link">阅读全文 &gt;</a>
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      
+    
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2018/09/05/工作至今/">工作至今</a></h1>
+  
+
+      
+      <time datetime="2018-09-05T04:36:23.000Z">2018-09-05</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h1 id="2018年9月5日"><a href="#2018年9月5日" class="headerlink" title="2018年9月5日"></a>2018年9月5日</h1><p>距离毕业已经三年零两月。<br>三年的时间不算长，但是还是足够让我学到不少。直到昨天清除一个比较难解的bug之后，突然就想写点东西记录下三年走来的路。</p>
+<h1 id="2014年11月18日"><a href="#2014年11月18日" class="headerlink" title="2014年11月18日"></a>2014年11月18日</h1><p>记得那是个阴天，站在517的楼层，透过窗户看到的全是远处的雾。报到之后，被分配到了退改签组，从此开始了我的实习之旅。<br>当时主要是使用C#负责后端业务层，数据库操作，MVC框架什么的，当时还是比较熟的，但是当时完全只是为了使用而学习，并没有深层次的理解过，所以现在几乎忘完了:(。项目中使用的是敏捷开发，所以基本上每周都会迭代，记得应该是每周都会有3到5个需求需要完成。<br>我们旁边组就是前端组，他们人数不多，所以很多时候我们组有前端需求的时候，刚哥就会交给我，所以我在517的时候还学会了JS/Ajax/JQuery这些全端的知识。想想那个时候真的是白天黑夜，朝8晚9的。后来对于智能家居的向往，就离职了。开始朝着嵌入式的方向前进。那时候东哥给了我特别多的帮助，还有鲁班等等，不知道现在大家过得怎么样了。<br>
+      
+    </p></div>
+    
+      
+      <footer>
+        <div class="alignleft">
+          <a href="/2018/09/05/工作至今/#more" class="more-link">阅读全文 &gt;</a>
+        </div>
+        <div class="clearfix"></div>
+      </footer>
       
     
   </div>
