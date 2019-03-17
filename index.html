@@ -67,6 +67,124 @@
     <header>
       
   
+    <h1 class="title"><a href="/2019/03/17/My-First-Linux-Module/">My First Linux Module</a></h1>
+  
+
+      
+      <time datetime="2019-03-17T09:48:29.000Z">2019-03-17</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h1 id="My-First-Linux-Module"><a href="#My-First-Linux-Module" class="headerlink" title="My First Linux Module"></a>My First Linux Module</h1><p>Today, I successfully build my first linux hello module.<br>So, I write this blog to record this process.</p>
+<ol>
+<li>First of all add a directory named hello in the kernel/driver, and add a file hello.c, write codes like bellow:</li>
+</ol>
+      
+    </div>
+    
+      
+      <footer>
+        <div class="alignleft">
+          <a href="/2019/03/17/My-First-Linux-Module/#more" class="more-link">阅读全文 &gt;</a>
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      
+    
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2019/02/28/三星S8相机黑画面解决/">三星S8相机黑画面解决</a></h1>
+  
+
+      
+      <time datetime="2019-02-28T02:27:00.000Z">2019-02-28</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h1 id="三星S8相机黑画面解决"><a href="#三星S8相机黑画面解决" class="headerlink" title="三星S8相机黑画面解决"></a>三星S8相机黑画面解决</h1><p>最近从媳妇儿那里入手了一个三星S8，所以就想着刷机，root试试。<br>但是手机刷机卸载系统软件后有遇到相机黑化面不能工作的情况，同时闪光灯也无法开启，人脸识别也无法使用。<br>具体情况如下图。<br>
+      
+    </p></div>
+    
+      
+      <footer>
+        <div class="alignleft">
+          <a href="/2019/02/28/三星S8相机黑画面解决/#more" class="more-link">阅读全文 &gt;</a>
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      
+    
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2019/02/26/三星S8-刷机记录/">三星S8 刷机记录</a></h1>
+  
+
+      
+      <time datetime="2019-02-26T12:08:34.000Z">2019-02-26</time>
+      
+    </header>
+    <div class="entry">
+      
+        <p>#三星Galaxy S8 刷机经验记录</p>
+<p>这段时间用上了三星S8，由于原生系统太耗电，所以萌生了root的想法。写这篇博客记录下这段时间的各种尝试。</p>
+<p>Root过程说明：</p>
+<p>友情提示，道路千万条，安全第一条。开始捣鼓手机之前请一定准备好官方的救砖包。</p>
+<p>1.解锁手机，我手上这台S8，时需要手机端先下载软件（crom1.0.8.apk)进行解锁；</p>
+<p>2.刷入第三方recovery，我选择的TWRP，在TWRP官网上下载了针对我高通CPU版本的刷机包；</p>
+<p>3.三星有自己的刷机工具ODin，到官网下载了最新版的ODin备用；</p>
+<p>4.下载安装S8的驱动，手机驱动可以到官网下载，或者安装豌豆荚这类的应用；</p>
+<p>5.手机关机-&gt;电源+Bixby+音量下-&gt;进入刷机模式-&gt;连接电脑-&gt;打开ODin，识别到手机-&gt;在AP中选择TWRP刷机包-&gt;开始刷机-&gt;手机重启时立马按住电源+Bixby+音量上进入Recovery，避免系统重启后重新覆盖recovery分区；</p>
+<p>6.刷入第三方Kernel（千万记住选择对应手机型号，以及CPU型号），或者第三方Rom来进行刷机。由于我直接刷入Magisk来获取root权限会导致系统无限重启，所以直接使用了第三方的刷机包，刷机包可以到XDA或者GFan论坛查找。</p>
+<p>刷入第三方rom后即获得Root权限，所以开始着手于电池电量优化，安装了绿色守护和黑域并行作业，使用自动运行管理对开机启动进行优化，配合内核调校(需要对应CPU的配置）后，开机一晚耗电从原来的十几个点到现在的一晚上4个点左右，最好成绩是没有掉一个电，简直是奇迹。</p>
+<p>开启免打扰似乎会减少手机射频耗电。</p>
+<p>最后记录下一些方便的工具：</p>
+<p>AppFreezer：免Root冻结</p>
+<p>GScript：脚本执行器</p>
+<p>GSamBatteryMonitor：电池监控</p>
+<p>Package NamesView：包名查看器</p>
+<p>创建快捷方式：可以将activity创建一个快捷方式</p>
+<p>钛备份：可以备份程序和数据，但是恢复的时候我只能一个一个安装</p>
+<p>Kernel Adiutor：内核参数修改，可以修改CPU，GPU，IO，温控等</p>
+<p>EX Kernel Manager：类似内核调校，不过可以将配置保存下来，也可以载入配置。</p>
+<p>补充:</p>
+<p>使用了绿色守护+黑域，一晚上待机的情况下，配合EX KernelManager的省电模式，关闭所有后台后，只耗了一个电(哈哈，不由地露出了欣慰的笑容)。</p>
+
+      
+    </div>
+    
+      
+    
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  <div class="post-content">
+    <header>
+      
+  
     <h1 class="title"><a href="/2018/04/06/两相双极性步进电机驱动/">两相双极性步进电机驱动</a></h1>
   
 
@@ -84,6 +202,41 @@
       <footer>
         <div class="alignleft">
           <a href="/2018/04/06/两相双极性步进电机驱动/#more" class="more-link">阅读全文 &gt;</a>
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      
+    
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2016/09/21/嵌入式开发一个月随笔/">嵌入式开发一个月随笔</a></h1>
+  
+
+      
+      <time datetime="2016-09-21T10:48:13.000Z">2016-09-21</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h1 id="嵌入式开发一个月随笔"><a href="#嵌入式开发一个月随笔" class="headerlink" title="嵌入式开发一个月随笔"></a>嵌入式开发一个月随笔</h1><p>从事嵌入式开发已经有一月有余，平心而论，我还是比较喜欢嵌入式开发的，不仅因为其涉及面广可以学习到很多知识，而且嵌入式开发对动手能力要求比较高，让我不觉得无聊。</p>
+<p>工作以来了解了嵌入式开发的相关流程，也实际动手做了几个需求。过程中遇到了很多问题也解决了很多问题，下面一一道来。</p>
+<p>调试，纯软件开发的调试可能没那么麻烦，IDE都会集成好调试工具，就算不使用IDE，也可以单独使用调试工具进行调试，像gdb之类的。这些调试工具可以进行断点设定、单步调试、多步调试、监视内存值等等十分有用的调试手段。但是呢，到了嵌入式板级调试，现在我们就主要使用的串口打印的方法进行调试，调试起来十分麻烦，想多测几个值就必须多写几句打印语句，用起来十分繁琐（当然嵌入式板级调试也有方法可以实现高效的调试手段，比如ARM提供的调试器，JTAG等，但是我对这些都不了解，以后提升开发效率可以从这些地方入手）。<br>
+      
+    </p></div>
+    
+      
+      <footer>
+        <div class="alignleft">
+          <a href="/2016/09/21/嵌入式开发一个月随笔/#more" class="more-link">阅读全文 &gt;</a>
         </div>
         <div class="clearfix"></div>
       </footer>

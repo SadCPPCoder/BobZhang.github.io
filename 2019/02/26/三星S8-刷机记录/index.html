@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Bob&#39;s Blogs › 三星S8 刷机记录</title>
+  <meta name="author" content="Bob Zhang">
+  
+  <meta name="description" content="Record the life and work.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="三星S8 刷机记录">
+  <meta property="og:site_name" content="Bob&#39;s Blogs">
+
+  
+    <meta property="og:image" content>
+  
+
+  <link href="/img/BZLogo.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Bob&#39;s Blogs" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-5353535-6']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+</html>
+
+<body>
+  <header id="header"><div class="meta inner">
+  <h1><a href="/">Bob&#39;s Blogs</a></h1>
+  <h2 id="header-h2">一切伟大的思想和行动，都有一个微不足道的开始。</h2>
+  <nav id="main-nav">
+    <ul>
+      
+      <li><a href="/">首页</a></li>
+      
+      <li><a href="/archives">文章归档</a></li>
+      
+      <li><a href="https://github.com/SadCPPCoder">Git</a></li>
+      
+      <li><a href="http://www.cplusplus.com/">友情链接</a></li>
+      
+      <li><a href="/about">关于</a></li>
+      
+      <img class="round_logo" src="/img/user_icon.jpg">
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+</div>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title">三星S8 刷机记录</h1>
+  
+
+      
+      <time datetime="2019-02-26T12:08:34.000Z">2019-02-26</time>
+      
+    </header>
+    <div class="entry">
+      
+        <p>#三星Galaxy S8 刷机经验记录</p>
+<p>这段时间用上了三星S8，由于原生系统太耗电，所以萌生了root的想法。写这篇博客记录下这段时间的各种尝试。</p>
+<p>Root过程说明：</p>
+<p>友情提示，道路千万条，安全第一条。开始捣鼓手机之前请一定准备好官方的救砖包。</p>
+<p>1.解锁手机，我手上这台S8，时需要手机端先下载软件（crom1.0.8.apk)进行解锁；</p>
+<p>2.刷入第三方recovery，我选择的TWRP，在TWRP官网上下载了针对我高通CPU版本的刷机包；</p>
+<p>3.三星有自己的刷机工具ODin，到官网下载了最新版的ODin备用；</p>
+<p>4.下载安装S8的驱动，手机驱动可以到官网下载，或者安装豌豆荚这类的应用；</p>
+<p>5.手机关机-&gt;电源+Bixby+音量下-&gt;进入刷机模式-&gt;连接电脑-&gt;打开ODin，识别到手机-&gt;在AP中选择TWRP刷机包-&gt;开始刷机-&gt;手机重启时立马按住电源+Bixby+音量上进入Recovery，避免系统重启后重新覆盖recovery分区；</p>
+<p>6.刷入第三方Kernel（千万记住选择对应手机型号，以及CPU型号），或者第三方Rom来进行刷机。由于我直接刷入Magisk来获取root权限会导致系统无限重启，所以直接使用了第三方的刷机包，刷机包可以到XDA或者GFan论坛查找。</p>
+<p>刷入第三方rom后即获得Root权限，所以开始着手于电池电量优化，安装了绿色守护和黑域并行作业，使用自动运行管理对开机启动进行优化，配合内核调校(需要对应CPU的配置）后，开机一晚耗电从原来的十几个点到现在的一晚上4个点左右，最好成绩是没有掉一个电，简直是奇迹。</p>
+<p>开启免打扰似乎会减少手机射频耗电。</p>
+<p>最后记录下一些方便的工具：</p>
+<p>AppFreezer：免Root冻结</p>
+<p>GScript：脚本执行器</p>
+<p>GSamBatteryMonitor：电池监控</p>
+<p>Package NamesView：包名查看器</p>
+<p>创建快捷方式：可以将activity创建一个快捷方式</p>
+<p>钛备份：可以备份程序和数据，但是恢复的时候我只能一个一个安装</p>
+<p>Kernel Adiutor：内核参数修改，可以修改CPU，GPU，IO，温控等</p>
+<p>EX Kernel Manager：类似内核调校，不过可以将配置保存下来，也可以载入配置。</p>
+<p>补充:</p>
+<p>使用了绿色守护+黑域，一晚上待机的情况下，配合EX KernelManager的省电模式，关闭所有后台后，只耗了一个电(哈哈，不由地露出了欣慰的笑容)。</p>
+
+      
+    </div>
+    
+    <footer>
+      <div class="alignleft">
+      
+  
+  <div class="categories">
+    <a href="/categories/技术/">技术</a>, <a href="/categories/技术/杂技/">杂技</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/玩弄手机/">玩弄手机</a>
+  </div>
+
+      </div>
+      <div class="clearfix"></div>
+    </footer>
+    
+  </div>
+</article>
+
+
+<section id="tail">
+    <h3><a>Thank you for reading!</a></h3><br>
+    <h5>
+        一切伟大的思想和行动都有一个微不足道的开始。<br>
+        Any great things in this world, always start with a small beginning.<br><br>
+        生活就像一盒巧克力，你永远不会知道下一块拿到的是哪个。<br>
+        Life is like a box of chocolates, you never know what you are going to get.
+    </h5>
+</section>
+
+</div></div>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer"><div class="inner"><div class="alignleft">
+  <p>
+  
+    &copy; 2019 Bob Zhang
+  
+  </p>
+  <p>
+    <a href="https://github.com/imbyron/hexo-theme-daisy">Theme</a> By <a href="http://googleyixia.com">Byron</a> based on <a href="https://github.com/willerce/hexo-theme-noderce">Noderce</a>.
+  </p>
+
+</div>
+<div class="clearfix"></div></div></footer>
+  <script type="text/javascript">
+
+</script>
+
+</body>
+</html>
