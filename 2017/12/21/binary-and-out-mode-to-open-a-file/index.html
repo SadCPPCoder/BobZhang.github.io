@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Bob&#39;s Blogs › binary and out mode to open a file</title>
+  <meta name="author" content="Bob Zhang">
+  
+  <meta name="description" content="Record the life and work.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="binary and out mode to open a file">
+  <meta property="og:site_name" content="Bob&#39;s Blogs">
+
+  
+    <meta property="og:image" content>
+  
+
+  <link href="/img/BZLogo.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Bob&#39;s Blogs" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-5353535-6']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+</html>
+
+<body>
+  <header id="header"><div class="meta inner">
+  <h1><a href="/">Bob&#39;s Blogs</a></h1>
+  <h2 id="header-h2">一切伟大的思想和行动，都有一个微不足道的开始。</h2>
+  <nav id="main-nav">
+    <ul>
+      
+      <li><a href="/">首页</a></li>
+      
+      <li><a href="/archives">文章归档</a></li>
+      
+      <li><a href="https://github.com/SadCPPCoder">Git</a></li>
+      
+      <li><a href="http://www.cplusplus.com/">友情链接</a></li>
+      
+      <li><a href="/about">关于</a></li>
+      
+      <img class="round_logo" src="/img/user_icon.jpg">
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+</div>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title">binary and out mode to open a file</h1>
+  
+
+      
+      <time datetime="2017-12-21T02:17:34.000Z">2017-12-21</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h1 id="binary-and-out-mode-to-open-a-file"><a href="#binary-and-out-mode-to-open-a-file" class="headerlink" title="binary and out mode to open a file"></a>binary and out mode to open a file</h1><p>When I use binary and out mode to open a exist file, and to modify the 4th and 8th byte data to 0x78, I found that the whole file will be rewrite, like below:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    fstream out;</span><br><span class="line">    out.open(<span class="string">"./test.txt"</span>, ios_base::binary | ios_base::out);</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">uint8_t</span> data = <span class="number">0x78</span>;</span><br><span class="line"> </span><br><span class="line">    out.seekp(<span class="number">4</span>, ios_base::beg);</span><br><span class="line">    out.write((<span class="keyword">char</span> *)&amp;data, <span class="number">1</span>);</span><br><span class="line"> </span><br><span class="line">    out.seekp(<span class="number">8</span>, ios_base::beg);</span><br><span class="line">    out.write((<span class="keyword">char</span> *)&amp;data, <span class="number">1</span>);</span><br><span class="line"> </span><br><span class="line">    out.close();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>And the file original data is :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF</span><br></pre></td></tr></table></figure>
+<p>But the file modified is:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">00 00 00 00 78 00 00 00 78</span><br></pre></td></tr></table></figure>
+<p>I have tried ios::app and ios::ate, the ios::app will out put my data at the end of the file and the skeep do not work.</p>
+<p>Finally, I thought out that the file is just a out file, so the api will not see the original data of the file, so I should add the ios::in.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    fstream out;</span><br><span class="line">    out.open(<span class="string">"./test.txt"</span>, ios_base::binary | ios_base::out | ios_base::in);</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">uint8_t</span> data = <span class="number">0x78</span>;</span><br><span class="line"> </span><br><span class="line">    out.seekp(<span class="number">4</span>, ios_base::beg);</span><br><span class="line">    out.write((<span class="keyword">char</span> *)&amp;data, <span class="number">1</span>);</span><br><span class="line"> </span><br><span class="line">    out.seekp(<span class="number">8</span>, ios_base::beg);</span><br><span class="line">    out.write((<span class="keyword">char</span> *)&amp;data, <span class="number">1</span>);</span><br><span class="line"> </span><br><span class="line">    out.close();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>And finally, I got the right data.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FF FF FF FF 78 FF FF FF 78 FF FF FF FF FF FF FF</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <footer>
+      <div class="alignleft">
+      
+  
+  <div class="categories">
+    <a href="/categories/技术/">技术</a>, <a href="/categories/技术/C/">C++</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/C/">C++</a>, <a href="/tags/Input-Output/">Input/Output</a>
+  </div>
+
+      </div>
+      <div class="clearfix"></div>
+    </footer>
+    
+  </div>
+</article>
+
+
+<section id="tail">
+    <h3><a>Thank you for reading!</a></h3><br>
+    <h5>
+        一切伟大的思想和行动都有一个微不足道的开始。<br>
+        Any great things in this world, always start with a small beginning.<br><br>
+        生活就像一盒巧克力，你永远不会知道下一块拿到的是哪个。<br>
+        Life is like a box of chocolates, you never know what you are going to get.
+    </h5>
+</section>
+
+</div></div>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer"><div class="inner"><div class="alignleft">
+  <p>
+  
+    &copy; 2019 Bob Zhang
+  
+  </p>
+  <p>
+    <a href="https://github.com/imbyron/hexo-theme-daisy">Theme</a> By <a href="http://googleyixia.com">Byron</a> based on <a href="https://github.com/willerce/hexo-theme-noderce">Noderce</a>.
+  </p>
+
+</div>
+<div class="clearfix"></div></div></footer>
+  <script type="text/javascript">
+
+</script>
+
+</body>
+</html>
