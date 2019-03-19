@@ -382,28 +382,26 @@
     <header>
       
   
-    <h1 class="title"><a href="/2016/09/21/嵌入式开发一个月随笔/">嵌入式开发一个月随笔</a></h1>
+    <h1 class="title"><a href="/2017/06/22/Bitmap每个像素值由指定的掩码决定/">Bitmap每个像素值由指定的掩码决定</a></h1>
   
 
       
-      <time datetime="2016-09-21T10:48:13.000Z">2016-09-21</time>
+      <time datetime="2017-06-22T10:31:59.000Z">2017-06-22</time>
       
     </header>
     <div class="entry">
       
-        <h1 id="嵌入式开发一个月随笔"><a href="#嵌入式开发一个月随笔" class="headerlink" title="嵌入式开发一个月随笔"></a>嵌入式开发一个月随笔</h1><p>从事嵌入式开发已经有一月有余，平心而论，我还是比较喜欢嵌入式开发的，不仅因为其涉及面广可以学习到很多知识，而且嵌入式开发对动手能力要求比较高，让我不觉得无聊。</p>
-<p>工作以来了解了嵌入式开发的相关流程，也实际动手做了几个需求。过程中遇到了很多问题也解决了很多问题，下面一一道来。</p>
-<p>调试，纯软件开发的调试可能没那么麻烦，IDE都会集成好调试工具，就算不使用IDE，也可以单独使用调试工具进行调试，像gdb之类的。这些调试工具可以进行断点设定、单步调试、多步调试、监视内存值等等十分有用的调试手段。但是呢，到了嵌入式板级调试，现在我们就主要使用的串口打印的方法进行调试，调试起来十分麻烦，想多测几个值就必须多写几句打印语句，用起来十分繁琐（当然嵌入式板级调试也有方法可以实现高效的调试手段，比如ARM提供的调试器，JTAG等，但是我对这些都不了解，以后提升开发效率可以从这些地方入手）。<br>
+        <h1 id="Bitmap每个像素值由指定的掩码决定"><a href="#Bitmap每个像素值由指定的掩码决定" class="headerlink" title="Bitmap每个像素值由指定的掩码决定"></a>Bitmap每个像素值由指定的掩码决定</h1><p>前面写了一个小工具来转换Bitmap到不同的颜色深度，程序主要的逻辑是：<br><code>Bitmap文件头 + Bitmap信息头 + Bitmap数据</code>。<br>在RGB32（RGB888）转RGB565的过程中也有遇到一个小问题：输出的颜色和原图的颜色显示不正确，但是像素值是正确的。<br>但是使用GIMP导出的图片又是正确的。</p>
+<p>通过比较发现内容上有一定的差异，如下图，左边是不正确的图片，右边是正确的图片：<br><img src="/2017/06/22/Bitmap每个像素值由指定的掩码决定/compare.png"></p>
+<font size="2px" color="#ff0000"><strong>注:</strong>图中使用的是<a href="https://sourceforge.net/projects/madedit/" title="MadEdit" target="_blank" rel="noopener">MadEdit</a>工具查看二进制数据。</font>
+
+<p>比较发现差异的地方在于：<strong><em>biCompression = 3</em></strong></p>
+<p>查阅资料发现：表示每个像素值由指定的掩码决定。</p>
+<p>而多余的16个字节依次就是RGBA的颜色掩码，这个掩码来与颜色值进行与运算，得到颜色值。 </p>
+
       
-    </p></div>
+    </div>
     
-      
-      <footer>
-        <div class="alignleft">
-          <a href="/2016/09/21/嵌入式开发一个月随笔/#more" class="more-link">阅读全文 &gt;</a>
-        </div>
-        <div class="clearfix"></div>
-      </footer>
       
     
   </div>
@@ -424,6 +422,10 @@
           <a href="/archives/">文章归档</a>
       </td>
       <td width="120" align="right">
+        
+        <div class="alignright">
+          <a href="/page/2/" class="alignright next">Next ›</a>
+        </div>
         
       </td>
     </tr>

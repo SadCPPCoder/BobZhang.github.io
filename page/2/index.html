@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Bob&#39;s Blogs › Page 2</title>
+  <meta name="author" content="Bob Zhang">
+  
+  <meta name="description" content="Record the life and work.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Bob&#39;s Blogs">
+
+  
+    <meta property="og:image" content>
+  
+
+  <link href="/img/BZLogo.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Bob&#39;s Blogs" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-5353535-6']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+</html>
+
+<body>
+  <header id="header"><div class="meta inner">
+  <h1><a href="/">Bob&#39;s Blogs</a></h1>
+  <h2 id="header-h2">一切伟大的思想和行动，都有一个微不足道的开始。</h2>
+  <nav id="main-nav">
+    <ul>
+      
+      <li><a href="/">首页</a></li>
+      
+      <li><a href="/archives">文章归档</a></li>
+      
+      <li><a href="https://github.com/SadCPPCoder">Git</a></li>
+      
+      <li><a href="http://www.cplusplus.com/">友情链接</a></li>
+      
+      <li><a href="/about">关于</a></li>
+      
+      <img class="round_logo" src="/img/user_icon.jpg">
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+</div>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2017/06/22/Bitmap-RGB24-4字节对齐/">Bitmap RGB24 4字节对齐</a></h1>
+  
+
+      
+      <time datetime="2017-06-22T01:54:15.000Z">2017-06-22</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h1 id="Bitmap-RGB24-4字节对齐"><a href="#Bitmap-RGB24-4字节对齐" class="headerlink" title="Bitmap RGB24 4字节对齐"></a>Bitmap RGB24 4字节对齐</h1><p>因为Bitmap支持最少2种颜色，并且可以支持RLC等压缩方式，所以Bitmap在嵌入式领域使用还是比较广泛的。<br>最近在写一个Bitmap相关的小工具时，发现自己处理出来的Bitmap，系统总是不能正常地识别，但是读出来的数据又都是正确的。而且同样的图片，通过系统工具生成的Bitmap，总会大一些，大小也超过图片<code>LengthxWidthXColotBit + Header</code>。</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>需求：<strong>将RGB32或RGB24的Bitmap转换成为RGB565的Bitmap，并且可以将RGB565转成RGB32和RGB24。</strong><br>实现算法：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pixel565[<span class="number">0</span>] = color[<span class="number">0</span>] &gt;&gt; <span class="number">3</span>;<span class="comment">// R</span></span><br><span class="line">pixel565[<span class="number">1</span>] = color[<span class="number">1</span>] &gt;&gt; <span class="number">2</span>;<span class="comment">// G</span></span><br><span class="line">pixel565[<span class="number">2</span>] = color[<span class="number">2</span>] &gt;&gt; <span class="number">3</span>;<span class="comment">// B</span></span><br></pre></td></tr></table></figure>
+<p>代码在RGB32、RGB24转RGB565和RGB565转RGB32过程中没有问题，但是在RGB565转RGB24时，出现了问题。<br>使用高宽均为10px的图片，转出来的图片，系统不能正确识别显示。但是用Windows绘图程序绘制出来的同样大小的图片却能正确显示。通过比较文件大小发现：</p>
+<p><table style="border=1 cellspacing=0"><tr><th>自己工具生成图片大小</th><th>绘图生成图片大小</th></tr><tr><td>374</td><td>354</td></tr></table><br>
+      
+    </p></div>
+    
+      
+      <footer>
+        <div class="alignleft">
+          <a href="/2017/06/22/Bitmap-RGB24-4字节对齐/#more" class="more-link">阅读全文 &gt;</a>
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      
+    
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2017/06/21/读取文件时，使用file-eof-判断结尾注意事项/">读取文件时，使用file.eof()判断结尾注意事项</a></h1>
+  
+
+      
+      <time datetime="2017-06-21T01:24:50.000Z">2017-06-21</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h1 id="读取文件时，使用file-eof-判断结尾注意事项"><a href="#读取文件时，使用file-eof-判断结尾注意事项" class="headerlink" title="读取文件时，使用file.eof()判断结尾注意事项"></a>读取文件时，使用file.eof()判断结尾注意事项</h1><p>今天写一个小功能需要读取文件，在判断文件结尾时使用了以下语句：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(infile.eof() &amp;&amp; infile.good())</span><br><span class="line">&#123;</span><br><span class="line">    infile.read((<span class="keyword">char</span>*)&amp;data, <span class="number">1</span>);</span><br><span class="line">    encodeData = data ^ CODE;</span><br><span class="line">    outfile.write((<span class="keyword">char</span>*)&amp;encodeData, <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>结果最后一个字符会读取两次，后来换了种方式，事先读取文件长度，再循环，就能争取读取文件</strong>：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">3</span>; i&lt;file_len; ++i)</span><br><span class="line">&#123;</span><br><span class="line">    infile.read((<span class="keyword">char</span>*)&amp;data, <span class="number">1</span>);</span><br><span class="line">    encodeData = data ^ CODE;</span><br><span class="line">    outfile.write((<span class="keyword">char</span>*)&amp;encodeData, <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><font color="#ff0000">最后了解到，是因为read函数需要读取失败时才将eofbit置位，所以置位时，循环还会执行一次。修改代码就没有问题了：</font><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(infile.read((<span class="keyword">char</span>*)&amp;data, <span class="number">1</span>) &amp;&amp; !infile.eof() &amp;&amp; infile.good())</span><br><span class="line">&#123;</span><br><span class="line">    encodeData = data ^ CODE;</span><br><span class="line">    outfile.write((<span class="keyword">char</span>*)&amp;encodeData, <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+      
+    
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2016/09/21/嵌入式开发一个月随笔/">嵌入式开发一个月随笔</a></h1>
+  
+
+      
+      <time datetime="2016-09-21T10:48:13.000Z">2016-09-21</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h1 id="嵌入式开发一个月随笔"><a href="#嵌入式开发一个月随笔" class="headerlink" title="嵌入式开发一个月随笔"></a>嵌入式开发一个月随笔</h1><p>从事嵌入式开发已经有一月有余，平心而论，我还是比较喜欢嵌入式开发的，不仅因为其涉及面广可以学习到很多知识，而且嵌入式开发对动手能力要求比较高，让我不觉得无聊。</p>
+<p>工作以来了解了嵌入式开发的相关流程，也实际动手做了几个需求。过程中遇到了很多问题也解决了很多问题，下面一一道来。</p>
+<p>调试，纯软件开发的调试可能没那么麻烦，IDE都会集成好调试工具，就算不使用IDE，也可以单独使用调试工具进行调试，像gdb之类的。这些调试工具可以进行断点设定、单步调试、多步调试、监视内存值等等十分有用的调试手段。但是呢，到了嵌入式板级调试，现在我们就主要使用的串口打印的方法进行调试，调试起来十分麻烦，想多测几个值就必须多写几句打印语句，用起来十分繁琐（当然嵌入式板级调试也有方法可以实现高效的调试手段，比如ARM提供的调试器，JTAG等，但是我对这些都不了解，以后提升开发效率可以从这些地方入手）。<br>
+      
+    </p></div>
+    
+      
+      <footer>
+        <div class="alignleft">
+          <a href="/2016/09/21/嵌入式开发一个月随笔/#more" class="more-link">阅读全文 &gt;</a>
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      
+    
+  </div>
+</article>
+
+
+
+
+
+<div class="pagination">
+  <table width="100%">
+    <tbody>
+    <tr>
+      <td width="120" align="left">
+        
+        <div class="alignleft">
+          <a href="/" class="alignleft prev">‹ Prev</a>
+        </div>
+        
+      </td>
+      <td width="auto" align="center">
+          <a href="/archives/">文章归档</a>
+      </td>
+      <td width="120" align="right">
+        
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</div></div>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer"><div class="inner"><div class="alignleft">
+  <p>
+  
+    &copy; 2019 Bob Zhang
+  
+  </p>
+  <p>
+    <a href="https://github.com/imbyron/hexo-theme-daisy">Theme</a> By <a href="http://googleyixia.com">Byron</a> based on <a href="https://github.com/willerce/hexo-theme-noderce">Noderce</a>.
+  </p>
+
+</div>
+<div class="clearfix"></div></div></footer>
+  <script type="text/javascript">
+
+</script>
+
+</body>
+</html>
