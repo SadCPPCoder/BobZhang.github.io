@@ -67,6 +67,41 @@
     <header>
       
   
+    <h1 class="title"><a href="/2019/03/05/自动喂鱼机/">自动喂鱼机</a></h1>
+  
+
+      
+      <time datetime="2019-03-05T14:10:15.000Z">2019-03-05</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h1 id="自动喂鱼机"><a href="#自动喂鱼机" class="headerlink" title="自动喂鱼机"></a>自动喂鱼机</h1><p>自从上次成功驱动了报废光驱上拆下来的步进电机后，就一直想做一个能够自动定时喂鱼的装置，解决我周末或者长假回老家后鱼缸没人照料的窘境。一旦连续两天不喂食，那么必有最弱小的一条鱼会被啃得面目全非，所以我急需这样一个装置。<br>所有有志者事竟成，一切伟大的思想和行动都有一个微不足道的开始，最终还是让我把这样一个“产品”给做出来了，先不多说了，上一张图来看看。</p>
+<img src="/2019/03/05/自动喂鱼机/feeder.gif">
+<p>下面详细讲解下实现的过程吧。<br>
+      
+    </p></div>
+    
+      
+      <footer>
+        <div class="alignleft">
+          <a href="/2019/03/05/自动喂鱼机/#more" class="more-link">阅读全文 &gt;</a>
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      
+    
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  <div class="post-content">
+    <header>
+      
+  
     <h1 class="title"><a href="/2019/02/28/三星S8相机黑画面解决/">三星S8相机黑画面解决</a></h1>
   
 
@@ -222,7 +257,8 @@
     </header>
     <div class="entry">
       
-        <h2 id="单例内存释放"><a href="#单例内存释放" class="headerlink" title="单例内存释放"></a>单例内存释放</h2><p>在程序中如果存在者单例，同时它们还需要执行delete等操作的话，我们通常在main的末尾去掉用单例的析构函数，或着利用编译器的属性，来设置main函数后执行的函数<figure class="highlight plain"><figcaption><span>```。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">但是如果单例并不是在main函数所在的文件中定义的，那么就还需要想办法在main函数中访问它们，显得相对麻烦。</span><br><span class="line"></span><br><span class="line">## 全局对象析构</span><br><span class="line">在系统中全局对象都是由系统负责析构的，所以全局变量的析构函数，会在程序停止运行后，由系统调用执行。</span><br><span class="line">``` cpp</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">class Test</span><br><span class="line">&#123;</span><br><span class="line">public:</span><br><span class="line">    Test(int a)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; &quot;Test Input: &quot; &lt;&lt; a &lt;&lt; &quot;.&quot; &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ~Test()</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; &quot;Test, destructor!&quot; &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Test test(88);</span><br><span class="line"></span><br><span class="line">int main( void )</span><br><span class="line">&#123;</span><br><span class="line">    std::cout &lt;&lt; &quot;main....&quot; &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <h2 id="单例内存释放"><a href="#单例内存释放" class="headerlink" title="单例内存释放"></a>单例内存释放</h2><p>在程序中如果存在者单例，同时它们还需要执行delete等操作的话，我们通常在main的末尾去掉用单例的析构函数，或着利用编译器的属性，来设置main函数后执行的函数<code>__attribute((destructor))</code>。<br>但是如果单例并不是在main函数所在的文件中定义的，那么就还需要想办法在main函数中访问它们，显得相对麻烦。</p>
+<h2 id="全局对象析构"><a href="#全局对象析构" class="headerlink" title="全局对象析构"></a>全局对象析构</h2><p>在系统中全局对象都是由系统负责析构的，所以全局变量的析构函数，会在程序停止运行后，由系统调用执行。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Test(<span class="keyword">int</span> a)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Test Input: "</span> &lt;&lt; a &lt;&lt; <span class="string">"."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ~Test()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Test, destructor!"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">Test <span class="title">test</span><span class="params">(<span class="number">88</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">( <span class="keyword">void</span> )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"main...."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
       
     </div>
     
@@ -369,39 +405,6 @@
         </div>
         <div class="clearfix"></div>
       </footer>
-      
-    
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  <div class="post-content">
-    <header>
-      
-  
-    <h1 class="title"><a href="/2017/06/22/Bitmap每个像素值由指定的掩码决定/">Bitmap每个像素值由指定的掩码决定</a></h1>
-  
-
-      
-      <time datetime="2017-06-22T10:31:59.000Z">2017-06-22</time>
-      
-    </header>
-    <div class="entry">
-      
-        <h1 id="Bitmap每个像素值由指定的掩码决定"><a href="#Bitmap每个像素值由指定的掩码决定" class="headerlink" title="Bitmap每个像素值由指定的掩码决定"></a>Bitmap每个像素值由指定的掩码决定</h1><p>前面写了一个小工具来转换Bitmap到不同的颜色深度，程序主要的逻辑是：<br><code>Bitmap文件头 + Bitmap信息头 + Bitmap数据</code>。<br>在RGB32（RGB888）转RGB565的过程中也有遇到一个小问题：输出的颜色和原图的颜色显示不正确，但是像素值是正确的。<br>但是使用GIMP导出的图片又是正确的。</p>
-<p>通过比较发现内容上有一定的差异，如下图，左边是不正确的图片，右边是正确的图片：<br><img src="/2017/06/22/Bitmap每个像素值由指定的掩码决定/compare.png"></p>
-<font size="2px" color="#ff0000"><strong>注:</strong>图中使用的是<a href="https://sourceforge.net/projects/madedit/" title="MadEdit" target="_blank" rel="noopener">MadEdit</a>工具查看二进制数据。</font>
-
-<p>比较发现差异的地方在于：<strong><em>biCompression = 3</em></strong></p>
-<p>查阅资料发现：表示每个像素值由指定的掩码决定。</p>
-<p>而多余的16个字节依次就是RGBA的颜色掩码，这个掩码来与颜色值进行与运算，得到颜色值。 </p>
-
-      
-    </div>
-    
       
     
   </div>
