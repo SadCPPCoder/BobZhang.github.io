@@ -1,0 +1,185 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Bob&#39;s Blogs › 基础算法总结</title>
+  <meta name="author" content="Bob Zhang">
+  
+  <meta name="description" content="Record the life and work.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="基础算法总结">
+  <meta property="og:site_name" content="Bob&#39;s Blogs">
+
+  
+    <meta property="og:image" content>
+  
+
+  <link href="/img/BZLogo.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Bob&#39;s Blogs" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-5353535-6']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+</html>
+
+<body>
+  <header id="header"><div class="meta inner">
+  <h1><a href="/">Bob&#39;s Blogs</a></h1>
+  <h2 id="header-h2">一切伟大的思想和行动，都有一个微不足道的开始。</h2>
+  <nav id="main-nav">
+    <ul>
+      
+      <li><a href="/">首页</a></li>
+      
+      <li><a href="/archives">文章归档</a></li>
+      
+      <li><a href="https://github.com/SadCPPCoder">Git</a></li>
+      
+      <li><a href="http://www.cplusplus.com/">友情链接</a></li>
+      
+      <li><a href="/about">关于</a></li>
+      
+      <img class="round_logo" src="/img/user_icon.jpg">
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+</div>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title">基础算法总结</h1>
+  
+
+      
+      <time datetime="2019-06-07T04:05:37.000Z">2019-06-07</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h1 id="基础算法总结"><a href="#基础算法总结" class="headerlink" title="基础算法总结"></a>基础算法总结</h1><p>前段时间看了一部分《算法-第4版》，加深了我对排序、查找等基础算法的理解，在项目中更能够熟练的使用他们。所以这篇文章主要是按照我自己的理解对这些算法进行叙述，以方便日后浏览。文章可能有不严谨的地方，希望多多包涵。</p>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>有很多操作都是基于有序序列的，所以排序算法可以说是基础中的基础，接下来就进行简单叙述。<br>排序算法的稳定性是值在有重复元素的排序操作后，等值有序元素的前后顺序不改变，否则即为不稳定。<br><img src="/2019/06/07/基础算法总结/sort.png"></p>
+<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><ul>
+<li>中心思想： 对一个长度为N的无序数组进行N次冒泡，每次冒泡是将最大值冒泡到本次冒泡的末尾，每次从0开始到m结束（m=N-n，n表示第几次排序），依次两两比较。由于整个过程是从最大值到最小值依次冒泡到末尾，所以这个算法被形象地称为冒泡排序。</li>
+<li>时间复杂度： O(n^2)</li>
+<li>动图演示：<img src="/2019/06/07/基础算法总结/BubbleSort.gif">
+<a id="more"></a>
+<h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3></li>
+<li>中心思想：与冒泡排序类似，选择排序是每次选择最小或最大值到数组待排序序列最前方，知道所有地数据排序完毕，如果序列长度为N，那么总共需要进行N次选择最小或最大值地过程，并且每次选择都在剩余数据中进行两两比较。</li>
+<li>时间复杂度：O(n^2)</li>
+<li>动图演示：<img src="/2019/06/07/基础算法总结/SelectSort.gif">
+<h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3></li>
+<li>中心思想： 将数组分为两部分，前部分为已排序部分，后部分为未排序部分，每次操作是从未排序部分取第一个数插入到已排序部分的正确位置，插入过程是从已排序数组末尾到0，依次与每个索引的元素进行比较，当已排序元素比待插入元素大，则进行数据移位，否则将待插入数据放入当前index所指空间。</li>
+<li>时间复杂度：O(n^2)</li>
+<li>动图演示：<img src="/2019/06/07/基础算法总结/InsertSort.gif">
+<h3 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h3></li>
+<li>中心思想： Shell排序又叫减小增量排序，是对简单插入排序的改进，主要操作是依靠一个排序增量序列，这个序列从大到小递减，最终递减为1，如此能减少比较次数。按照增量序列的长度K，对整个序列进行K趟排序。如增量序列为[7, 4, 1]，则总共需要3趟排序：</li>
+</ul>
+<ol>
+<li>第一趟：从index为0开始每次间隔6个元素，到index为6时结束，总共分为N/7个小序列；</li>
+<li>第二趟：从index为0开始每次间隔3个元素，到index为4时结束，总共分为N/4个小序列；</li>
+<li>第三趟：从index为0开始每次间隔0个元素，这一次即把所有元素排序完成。</li>
+</ol>
+<ul>
+<li>时间复杂度：O(n^1.3)</li>
+<li>动图演示：<img src="/2019/06/07/基础算法总结/ShellSort.gif">
+<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3></li>
+<li>中心思想：将长度为N的待排序数组分成两部分，每部分长度为N/2，并对两部分分别二分，直到不能细分时，即长度为2时，对两个元素进行排序，然后对两组元素进行归并，即把两个有序数组归并为一个有序数组，依次类推直到归并到一个长度为N的数组，排序即结束。</li>
+<li>时间复杂度：O(nlog2n)</li>
+<li>动图演示：<img src="/2019/06/07/基础算法总结/MergeSort.gif">
+<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3></li>
+<li>中心思想：选定未排序序列的第一个为基准值，并且依照该基准值进行<strong>分区</strong>，比基准值小的排在前面，比基准值大的排在后面，再对两部分分别进行分区操作，依次类推，直到无法分区，即只有1个元素，至此排序完成。</li>
+<li>时间复杂度：O(nlog2n)</li>
+<li>动图演示：<img src="/2019/06/07/基础算法总结/QuickSort.gif">
+<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3></li>
+<li>中心思想：以优先队列为基础构造长度为N的优先队列，再每次将最大值取出与已经构造的优先队列中右下最末尾数据进行交换，再对剩余数据进行上浮和下沉操作，再取出最大值，依次类推，将所有数据排序完成。</li>
+<li>时间复杂度：O(nlog2n)</li>
+<li>动图演示：</li>
+<li><img src="/2019/06/07/基础算法总结/HeapSort.gif">
+<h3 id="计数排序"><a href="#计数排序" class="headerlink" title="计数排序"></a>计数排序</h3></li>
+<li>中心思想：</li>
+<li>时间复杂度：</li>
+<li>动图演示：<h3 id="桶排序"><a href="#桶排序" class="headerlink" title="桶排序"></a>桶排序</h3></li>
+<li>中心思想：</li>
+<li>时间复杂度：</li>
+<li>动图演示：<h3 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h3></li>
+<li>中心思想：</li>
+<li>时间复杂度：</li>
+<li>动图演示：<br>———————————————未完待续——————————————<h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><h3 id="无序链表顺序查找"><a href="#无序链表顺序查找" class="headerlink" title="无序链表顺序查找"></a>无序链表顺序查找</h3><h3 id="有序数组二分查找"><a href="#有序数组二分查找" class="headerlink" title="有序数组二分查找"></a>有序数组二分查找</h3><h3 id="二叉树查找"><a href="#二叉树查找" class="headerlink" title="二叉树查找"></a>二叉树查找</h3><h3 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h3><h3 id="散列表"><a href="#散列表" class="headerlink" title="散列表"></a>散列表</h3><h2 id="图"><a href="#图" class="headerlink" title="图"></a>图</h2><h3 id="广度优先搜索算法"><a href="#广度优先搜索算法" class="headerlink" title="广度优先搜索算法"></a>广度优先搜索算法</h3><h3 id="深度优先搜索算法"><a href="#深度优先搜索算法" class="headerlink" title="深度优先搜索算法"></a>深度优先搜索算法</h3><h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><h3 id="排序-1"><a href="#排序-1" class="headerlink" title="排序"></a>排序</h3><h4 id="索引计数"><a href="#索引计数" class="headerlink" title="索引计数"></a>索引计数</h4><h4 id="低位优先排序"><a href="#低位优先排序" class="headerlink" title="低位优先排序"></a>低位优先排序</h4><h4 id="高位优先排序"><a href="#高位优先排序" class="headerlink" title="高位优先排序"></a>高位优先排序</h4><h3 id="查找-1"><a href="#查找-1" class="headerlink" title="查找"></a>查找</h3><h4 id="单词查找树"><a href="#单词查找树" class="headerlink" title="单词查找树"></a>单词查找树</h4><h4 id="三向单词查找树"><a href="#三向单词查找树" class="headerlink" title="三向单词查找树"></a>三向单词查找树</h4><h3 id="子串查找"><a href="#子串查找" class="headerlink" title="子串查找"></a>子串查找</h3><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><h2 id="数据压缩"><a href="#数据压缩" class="headerlink" title="数据压缩"></a>数据压缩</h2></li>
+</ul>
+<p>参考： <a href="https://www.cnblogs.com/onepixel/articles/7674659.html" title="十大经典排序算法（动图演示）" target="_blank" rel="noopener">https://www.cnblogs.com/onepixel/articles/7674659.html</a></p>
+
+      
+    </div>
+    
+    <footer>
+      <div class="alignleft">
+      
+  
+  <div class="categories">
+    <a href="/categories/技术/">技术</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/算法/">算法</a>, <a href="/tags/总结/">总结</a>
+  </div>
+
+      </div>
+      <div class="clearfix"></div>
+    </footer>
+    
+  </div>
+</article>
+
+
+<section id="tail">
+    <h3><a>Thank you for reading!</a></h3><br>
+    <h5>
+        一切伟大的思想和行动都有一个微不足道的开始。<br>
+        Any great thing in this world, always start with a small beginning.<br><br>
+        生活就像一盒巧克力，你永远不会知道下一块拿到的是哪个。<br>
+        Life is like a box of chocolates, you never know what you are going to get.
+    </h5>
+</section>
+
+</div></div>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer"><div class="inner"><div class="alignleft">
+  <p>
+  
+    &copy; 2019 Bob Zhang
+  
+  </p>
+  <p>
+    <a href="https://github.com/imbyron/hexo-theme-daisy">Theme</a> By <a href="http://googleyixia.com">Byron</a> based on <a href="https://github.com/willerce/hexo-theme-noderce">Noderce</a>.
+  </p>
+
+</div>
+<div class="clearfix"></div></div></footer>
+  <script type="text/javascript">
+
+</script>
+
+</body>
+</html>

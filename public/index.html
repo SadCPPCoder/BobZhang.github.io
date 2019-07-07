@@ -1,0 +1,460 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Bob&#39;s Blogs</title>
+  <meta name="author" content="Bob Zhang">
+  
+  <meta name="description" content="Record the life and work.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Bob&#39;s Blogs">
+
+  
+    <meta property="og:image" content>
+  
+
+  <link href="/img/BZLogo.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Bob&#39;s Blogs" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-5353535-6']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+</html>
+
+<body>
+  <header id="header"><div class="meta inner">
+  <h1><a href="/">Bob&#39;s Blogs</a></h1>
+  <h2 id="header-h2">一切伟大的思想和行动，都有一个微不足道的开始。</h2>
+  <nav id="main-nav">
+    <ul>
+      
+      <li><a href="/">首页</a></li>
+      
+      <li><a href="/archives">文章归档</a></li>
+      
+      <li><a href="https://github.com/SadCPPCoder">Git</a></li>
+      
+      <li><a href="http://www.cplusplus.com/">友情链接</a></li>
+      
+      <li><a href="/about">关于</a></li>
+      
+      <img class="round_logo" src="/img/user_icon.jpg">
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+</div>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2019/03/05/自动喂鱼机/">自动喂鱼机</a></h1>
+  
+
+      
+      <time datetime="2019-03-05T14:10:15.000Z">2019-03-05</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h1 id="自动喂鱼机"><a href="#自动喂鱼机" class="headerlink" title="自动喂鱼机"></a>自动喂鱼机</h1><p>自从上次成功驱动了报废光驱上拆下来的步进电机后，就一直想做一个能够自动定时喂鱼的装置，解决我周末或者长假回老家后鱼缸没人照料的窘境。一旦连续两天不喂食，那么必有最弱小的一条鱼会被啃得面目全非，所以我急需这样一个装置。<br>所有有志者事竟成，一切伟大的思想和行动都有一个微不足道的开始，最终还是让我把这样一个“产品”给做出来了，先不多说了，上一张图来看看。</p>
+<img src="/2019/03/05/自动喂鱼机/feeder.gif">
+<p>下面详细讲解下实现的过程吧。<br>
+      
+    </p></div>
+    
+      
+      <footer>
+        <div class="alignleft">
+          <a href="/2019/03/05/自动喂鱼机/#more" class="more-link">阅读全文 &gt;</a>
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      
+    
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2019/06/07/基础算法总结/">基础算法总结</a></h1>
+  
+
+      
+      <time datetime="2019-06-07T04:05:37.000Z">2019-06-07</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h1 id="基础算法总结"><a href="#基础算法总结" class="headerlink" title="基础算法总结"></a>基础算法总结</h1><p>前段时间看了一部分《算法-第4版》，加深了我对排序、查找等基础算法的理解，在项目中更能够熟练的使用他们。所以这篇文章主要是按照我自己的理解对这些算法进行叙述，以方便日后浏览。文章可能有不严谨的地方，希望多多包涵。</p>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>有很多操作都是基于有序序列的，所以排序算法可以说是基础中的基础，接下来就进行简单叙述。<br>排序算法的稳定性是值在有重复元素的排序操作后，等值有序元素的前后顺序不改变，否则即为不稳定。<br><img src="/2019/06/07/基础算法总结/sort.png"></p>
+<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><ul>
+<li>中心思想： 对一个长度为N的无序数组进行N次冒泡，每次冒泡是将最大值冒泡到本次冒泡的末尾，每次从0开始到m结束（m=N-n，n表示第几次排序），依次两两比较。由于整个过程是从最大值到最小值依次冒泡到末尾，所以这个算法被形象地称为冒泡排序。</li>
+<li>时间复杂度： O(n^2)</li>
+<li>动图演示：<img src="/2019/06/07/基础算法总结/BubbleSort.gif">
+      
+    </li></ul></div>
+    
+      
+      <footer>
+        <div class="alignleft">
+          <a href="/2019/06/07/基础算法总结/#more" class="more-link">阅读全文 &gt;</a>
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      
+    
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2019/02/28/三星S8相机黑画面解决/">三星S8相机黑画面解决</a></h1>
+  
+
+      
+      <time datetime="2019-02-28T02:27:00.000Z">2019-02-28</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h1 id="三星S8相机黑画面解决"><a href="#三星S8相机黑画面解决" class="headerlink" title="三星S8相机黑画面解决"></a>三星S8相机黑画面解决</h1><p>最近从媳妇儿那里入手了一个三星S8，所以就想着刷机，root试试。<br>但是手机刷机卸载系统软件后有遇到相机黑化面不能工作的情况，同时闪光灯也无法开启，人脸识别也无法使用。<br>具体情况如下图。<br>
+      
+    </p></div>
+    
+      
+      <footer>
+        <div class="alignleft">
+          <a href="/2019/02/28/三星S8相机黑画面解决/#more" class="more-link">阅读全文 &gt;</a>
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      
+    
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2019/02/26/三星S8-刷机记录/">三星S8 刷机记录</a></h1>
+  
+
+      
+      <time datetime="2019-02-26T12:08:34.000Z">2019-02-26</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h1 id="三星Galaxy-S8-刷机经验记录"><a href="#三星Galaxy-S8-刷机经验记录" class="headerlink" title="三星Galaxy S8 刷机经验记录"></a>三星Galaxy S8 刷机经验记录</h1><p>这段时间用上了三星S8，由于原生系统太耗电，所以萌生了root的想法。写这篇博客记录下这段时间的各种尝试。</p>
+<h1 id="Root过程说明："><a href="#Root过程说明：" class="headerlink" title="Root过程说明："></a>Root过程说明：</h1><p>友情提示，<strong><font color="#FF00ff">道路千万条，安全第一条。开始捣鼓手机之前请一定准备好官方的救砖包。</font></strong></p>
+<ol>
+<li><p>解锁手机，我手上这台S8，时需要手机端先下载软件（crom1.0.8.apk)进行解锁；</p>
+</li>
+<li><p>刷入第三方recovery，我选择的TWRP，在TWRP官网上下载了针对我高通CPU版本的刷机包；</p>
+      
+    </li></ol></div>
+    
+      
+      <footer>
+        <div class="alignleft">
+          <a href="/2019/02/26/三星S8-刷机记录/#more" class="more-link">阅读全文 &gt;</a>
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      
+    
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2018/12/02/Socket编程基础/">Socket编程基础</a></h1>
+  
+
+      
+      <time datetime="2018-12-02T14:12:21.000Z">2018-12-02</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h1 id="Socket编程之Socket基础"><a href="#Socket编程之Socket基础" class="headerlink" title="Socket编程之Socket基础"></a>Socket编程之Socket基础</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Socket编程主要分为TCP／UDP／SCTP三种，每一种都有各自的优点，所以会根据实际情况决定选用何种Socket。<br>之后会抽取空余时间来开始深入学习Socket编程。</p>
+<p>今天学习的是TCP编程。</p>
+<h2 id="基本流程："><a href="#基本流程：" class="headerlink" title="基本流程："></a>基本流程：</h2><p>TCP基本客户端与服务端的套接字函数：</p>
+<ul>
+<li>Client: <pre><code>* socket
+* connect
+* write/read
+* close.
+</code></pre>
+      
+    </li></ul></div>
+    
+      
+      <footer>
+        <div class="alignleft">
+          <a href="/2018/12/02/Socket编程基础/#more" class="more-link">阅读全文 &gt;</a>
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      
+    
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2018/09/05/工作至今/">工作至今</a></h1>
+  
+
+      
+      <time datetime="2018-09-05T04:36:23.000Z">2018-09-05</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h1 id="2018年9月5日"><a href="#2018年9月5日" class="headerlink" title="2018年9月5日"></a>2018年9月5日</h1><p>距离毕业已经三年零两月。<br>三年的时间不算长，但是还是足够让我学到不少。直到昨天清除一个比较难解的bug之后，突然就想写点东西记录下三年走来的路。</p>
+<h1 id="2014年11月18日"><a href="#2014年11月18日" class="headerlink" title="2014年11月18日"></a>2014年11月18日</h1><p>记得那是个阴天，站在517的楼层，透过窗户看到的全是远处的雾。报到之后，被分配到了退改签组，从此开始了我的实习之旅。<br>当时主要是使用C#负责后端业务层，数据库操作，MVC框架什么的，当时还是比较熟的，但是当时完全只是为了使用而学习，并没有深层次的理解过，所以现在几乎忘完了:(。项目中使用的是敏捷开发，所以基本上每周都会迭代，记得应该是每周都会有3到5个需求需要完成。<br>我们旁边组就是前端组，他们人数不多，所以很多时候我们组有前端需求的时候，刚哥就会交给我，所以我在517的时候还学会了JS/Ajax/JQuery这些全端的知识。想想那个时候真的是白天黑夜，朝8晚9的。后来对于智能家居的向往，就离职了。开始朝着嵌入式的方向前进。那时候东哥给了我特别多的帮助，还有鲁班等等，不知道现在大家过得怎么样了。<br>
+      
+    </p></div>
+    
+      
+      <footer>
+        <div class="alignleft">
+          <a href="/2018/09/05/工作至今/#more" class="more-link">阅读全文 &gt;</a>
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      
+    
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2018/08/27/巧用std-shared-ptr全局对象释放单例内存/">巧用std::shared_ptr全局对象释放单例内存</a></h1>
+  
+
+      
+      <time datetime="2018-08-27T10:01:24.000Z">2018-08-27</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h2 id="单例内存释放"><a href="#单例内存释放" class="headerlink" title="单例内存释放"></a>单例内存释放</h2><p>在程序中如果存在者单例，同时它们还需要执行delete等操作的话，我们通常在main的末尾去掉用单例的析构函数，或着利用编译器的属性，来设置main函数后执行的函数<code>__attribute((destructor))</code>。<br>但是如果单例并不是在main函数所在的文件中定义的，那么就还需要想办法在main函数中访问它们，显得相对麻烦。</p>
+<h2 id="全局对象析构"><a href="#全局对象析构" class="headerlink" title="全局对象析构"></a>全局对象析构</h2><p>在系统中全局对象都是由系统负责析构的，所以全局变量的析构函数，会在程序停止运行后，由系统调用执行。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Test(<span class="keyword">int</span> a)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Test Input: "</span> &lt;&lt; a &lt;&lt; <span class="string">"."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ~Test()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Test, destructor!"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">Test <span class="title">test</span><span class="params">(<span class="number">88</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">( <span class="keyword">void</span> )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"main...."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+      
+    </div>
+    
+      
+      <footer>
+        <div class="alignleft">
+          <a href="/2018/08/27/巧用std-shared-ptr全局对象释放单例内存/#more" class="more-link">阅读全文 &gt;</a>
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      
+    
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2018/04/06/两相双极性步进电机驱动/">两相双极性步进电机驱动</a></h1>
+  
+
+      
+      <time datetime="2018-04-06T08:37:00.000Z">2018-04-06</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近公司报废机器，所以我从要报废的机器中拆了不少零件，其中就在光驱中拆了迷你型步进电机（参见下图），在网上查阅资料了解到这个电机叫<strong>两相双极性步进电机</strong>。<br><img src="/2018/04/06/两相双极性步进电机驱动/steper.png"><br>
+      
+    </p></div>
+    
+      
+      <footer>
+        <div class="alignleft">
+          <a href="/2018/04/06/两相双极性步进电机驱动/#more" class="more-link">阅读全文 &gt;</a>
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      
+    
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2017/12/21/Hide-Data-into-bitmap-with-ARGB8888-format/">Hide Data into bitmap with ARGB8888 format</a></h1>
+  
+
+      
+      <time datetime="2017-12-21T07:38:25.000Z">2017-12-21</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h1 id="Hide-Data-into-bitmap-with-ARGB8888-format"><a href="#Hide-Data-into-bitmap-with-ARGB8888-format" class="headerlink" title="Hide Data into bitmap with ARGB8888 format"></a>Hide Data into bitmap with ARGB8888 format</h1><p>最近工作上接触Bitmap比较多，再加上之前就看到说如何利用图片的透明标志位来存放私密信息。<br>所以今天就动手写了这么个小工具，可以将一定长度的文本文件的内容隐藏到图片中保存起来，需要使用时再从图片中解码提取出来。</p>
+<p>bitmap.h: 声明Bitmap的文件头结构，Bitmap类和数据隐藏类。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> BMP_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BMP_H</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DEBUG 0</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOG std::cout</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HEX std::hex</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DEC std::dec</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FLAG_0 (0xFF)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FLAG_1 (0xEE)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FLAG_2 (0xDD)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FLAG_3 (0xCC)</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DATA_CODE (0xCC)</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BYTE_PER_PIXEL (4)</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pack(push, 1)</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">uint16_t</span> bfType; <span class="comment">// Type of bitmap, in windows, always 'BM'</span></span><br><span class="line">    <span class="keyword">uint32_t</span> bfSize; <span class="comment">// Size of the bitmap file</span></span><br><span class="line">    <span class="keyword">uint16_t</span> bfReserved1; <span class="comment">// reserved feild</span></span><br><span class="line">    <span class="keyword">uint16_t</span> bfReserved2; <span class="comment">// reserved feild</span></span><br><span class="line">    <span class="keyword">uint32_t</span> bfOffBits; <span class="comment">// the start address of the bitmap data</span></span><br><span class="line">&#125;BMP_FILE_HEADER;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">uint32_t</span> biSize; <span class="comment">// size of this struct</span></span><br><span class="line">    <span class="keyword">uint32_t</span> biWidth; <span class="comment">// image width, unit is pixel</span></span><br><span class="line">    <span class="keyword">uint32_t</span> biHeight; <span class="comment">// image height, unit is pixel</span></span><br><span class="line">    <span class="keyword">uint16_t</span> biPlanes; <span class="comment">// alsways 1</span></span><br><span class="line">    <span class="keyword">uint16_t</span> biBitCount; <span class="comment">// color depth of the image, 1, 4, 8, 16, 24 and 32</span></span><br><span class="line">    <span class="keyword">uint32_t</span> biCompression; <span class="comment">// compression type, 0=no compress, 1=RLE8 compress</span></span><br><span class="line">                            <span class="comment">// 2=RLE4 compress, 3=pixel color mask</span></span><br><span class="line">    <span class="keyword">uint32_t</span> biSizeImage; <span class="comment">// pixel data size of the image</span></span><br><span class="line">    <span class="keyword">uint32_t</span> biXPelsPerMeter; <span class="comment">// H resolution, pixel per meter</span></span><br><span class="line">    <span class="keyword">uint32_t</span> biYPelsPerMeter; <span class="comment">// V resolution, pixel per meter</span></span><br><span class="line">    <span class="keyword">uint32_t</span> biClrUsed; <span class="comment">// color number that used, 0=all color</span></span><br><span class="line">    <span class="keyword">uint32_t</span> biClrImportant; <span class="comment">// important color amount, 0=all color important</span></span><br><span class="line">&#125;BMP_INFO_HEADER;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pacn(pop)</span></span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bitmap</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    BMP_FILE_HEADER m_fileHeader;</span><br><span class="line">    BMP_INFO_HEADER m_infoHeader;</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> m_bmpPath;</span><br><span class="line">    <span class="keyword">bool</span> m_parseFlag;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Bitmap(<span class="built_in">std</span>::<span class="built_in">string</span> path);</span><br><span class="line">    ~Bitmap();</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">bmpParse</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="keyword">uint32_t</span> getBmpSize();</span><br><span class="line">    <span class="keyword">uint32_t</span> getBmpDataAddr();</span><br><span class="line">    <span class="built_in">std</span>::<span class="function"><span class="built_in">string</span> <span class="title">getBmpPath</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="keyword">uint32_t</span> getBmpPixelNum();</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DataHider</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">uint8_t</span> m_flags[<span class="number">4</span>];</span><br><span class="line">    <span class="keyword">uint8_t</span> m_length[<span class="number">4</span>];</span><br><span class="line">    Bitmap m_bitmapHeader;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> m_dataFilePath;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isAHider</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="keyword">uint32_t</span> getFileSize(<span class="built_in">std</span>::ifstream &amp;in);</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">readTransByte</span><span class="params">(<span class="built_in">std</span>::fstream &amp;file, <span class="keyword">uint8_t</span> &amp;val, <span class="keyword">int</span> pos)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">writeTransByte</span><span class="params">(<span class="built_in">std</span>::fstream &amp;file, <span class="keyword">uint8_t</span> val, <span class="keyword">int</span> pos)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">length2Byte</span><span class="params">(<span class="keyword">uint32_t</span> length)</span></span>;</span><br><span class="line">    <span class="keyword">uint32_t</span> byte2Length();</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    DataHider(<span class="built_in">std</span>::<span class="built_in">string</span> dataPath, <span class="built_in">std</span>::<span class="built_in">string</span> bmpPath);</span><br><span class="line">    ~DataHider();</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">doEncode</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">doDecode</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// BMP_H</span></span></span><br></pre></td></tr></table></figure></p>
+      
+    </div>
+    
+      
+      <footer>
+        <div class="alignleft">
+          <a href="/2017/12/21/Hide-Data-into-bitmap-with-ARGB8888-format/#more" class="more-link">阅读全文 &gt;</a>
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      
+    
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2017/12/21/binary-and-out-mode-to-open-a-file/">binary and out mode to open a file</a></h1>
+  
+
+      
+      <time datetime="2017-12-21T02:17:34.000Z">2017-12-21</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h1 id="binary-and-out-mode-to-open-a-file"><a href="#binary-and-out-mode-to-open-a-file" class="headerlink" title="binary and out mode to open a file"></a>binary and out mode to open a file</h1><p>When I use binary and out mode to open a exist file, and to modify the 4th and 8th byte data to 0x78, I found that the whole file will be rewrite, like below:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    fstream out;</span><br><span class="line">    out.open(<span class="string">"./test.txt"</span>, ios_base::binary | ios_base::out);</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">uint8_t</span> data = <span class="number">0x78</span>;</span><br><span class="line"> </span><br><span class="line">    out.seekp(<span class="number">4</span>, ios_base::beg);</span><br><span class="line">    out.write((<span class="keyword">char</span> *)&amp;data, <span class="number">1</span>);</span><br><span class="line"> </span><br><span class="line">    out.seekp(<span class="number">8</span>, ios_base::beg);</span><br><span class="line">    out.write((<span class="keyword">char</span> *)&amp;data, <span class="number">1</span>);</span><br><span class="line"> </span><br><span class="line">    out.close();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+      
+    </div>
+    
+      
+      <footer>
+        <div class="alignleft">
+          <a href="/2017/12/21/binary-and-out-mode-to-open-a-file/#more" class="more-link">阅读全文 &gt;</a>
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      
+    
+  </div>
+</article>
+
+
+
+
+
+<div class="pagination">
+  <table width="100%">
+    <tbody>
+    <tr>
+      <td width="120" align="left">
+        
+      </td>
+      <td width="auto" align="center">
+          <a href="/archives/">文章归档</a>
+      </td>
+      <td width="120" align="right">
+        
+        <div class="alignright">
+          <a href="/page/2/" class="alignright next">Next ›</a>
+        </div>
+        
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</div></div>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer"><div class="inner"><div class="alignleft">
+  <p>
+  
+    &copy; 2019 Bob Zhang
+  
+  </p>
+  <p>
+    <a href="https://github.com/imbyron/hexo-theme-daisy">Theme</a> By <a href="http://googleyixia.com">Byron</a> based on <a href="https://github.com/willerce/hexo-theme-noderce">Noderce</a>.
+  </p>
+
+</div>
+<div class="clearfix"></div></div></footer>
+  <script type="text/javascript">
+
+</script>
+
+</body>
+</html>

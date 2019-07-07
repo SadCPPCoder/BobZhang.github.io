@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Bob&#39;s Blogs › 三星S8相机黑画面解决</title>
+  <meta name="author" content="Bob Zhang">
+  
+  <meta name="description" content="Record the life and work.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="三星S8相机黑画面解决">
+  <meta property="og:site_name" content="Bob&#39;s Blogs">
+
+  
+    <meta property="og:image" content>
+  
+
+  <link href="/img/BZLogo.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Bob&#39;s Blogs" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-5353535-6']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+</html>
+
+<body>
+  <header id="header"><div class="meta inner">
+  <h1><a href="/">Bob&#39;s Blogs</a></h1>
+  <h2 id="header-h2">一切伟大的思想和行动，都有一个微不足道的开始。</h2>
+  <nav id="main-nav">
+    <ul>
+      
+      <li><a href="/">首页</a></li>
+      
+      <li><a href="/archives">文章归档</a></li>
+      
+      <li><a href="https://github.com/SadCPPCoder">Git</a></li>
+      
+      <li><a href="http://www.cplusplus.com/">友情链接</a></li>
+      
+      <li><a href="/about">关于</a></li>
+      
+      <img class="round_logo" src="/img/user_icon.jpg">
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+</div>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title">三星S8相机黑画面解决</h1>
+  
+
+      
+      <time datetime="2019-02-28T02:27:00.000Z">2019-02-28</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h1 id="三星S8相机黑画面解决"><a href="#三星S8相机黑画面解决" class="headerlink" title="三星S8相机黑画面解决"></a>三星S8相机黑画面解决</h1><p>最近从媳妇儿那里入手了一个三星S8，所以就想着刷机，root试试。<br>但是手机刷机卸载系统软件后有遇到相机黑化面不能工作的情况，同时闪光灯也无法开启，人脸识别也无法使用。<br>具体情况如下图。<br><a id="more"></a><br><img src="/2019/02/28/三星S8相机黑画面解决/camera_error.jpg"><img src="/2019/02/28/三星S8相机黑画面解决/light_error.jpg"></p>
+<p>在网上查询资料都没有找到有用的信息，最后才想到使用Logcat来查看是否有报错信息。<br>接上电脑打开logcat，最终发现相机相关的错误，说libquramresize.so无法找到。<br><img src="/2019/02/28/三星S8相机黑画面解决/log1.jpg"><br>所以只要能够将相关的文件放到对应的目录，问题有可能迎刃而解。在刷机之前就下载好了官方的固件包，所以便使用蘑菇ROM助手提取了官方5件套中的文件拷贝到相应目录修改权限。</p>
+<p>后来有报libSaitRelightingInterface.so没有找到，同样的方法拷贝到相应目录，改权限开机后相机就可以使用了。<br><img src="/2019/02/28/三星S8相机黑画面解决/log1.jpg"></p>
+<p>由此得到一个结论，如果安卓手机遇到莫名其妙的问题，不妨试试logcat查看是否有相关的错误信息。</p>
+
+      
+    </div>
+    
+    <footer>
+      <div class="alignleft">
+      
+  
+  <div class="categories">
+    <a href="/categories/技术/">技术</a>, <a href="/categories/技术/杂记/">杂记</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/玩弄手机/">玩弄手机</a>
+  </div>
+
+      </div>
+      <div class="clearfix"></div>
+    </footer>
+    
+  </div>
+</article>
+
+
+<section id="tail">
+    <h3><a>Thank you for reading!</a></h3><br>
+    <h5>
+        一切伟大的思想和行动都有一个微不足道的开始。<br>
+        Any great thing in this world, always start with a small beginning.<br><br>
+        生活就像一盒巧克力，你永远不会知道下一块拿到的是哪个。<br>
+        Life is like a box of chocolates, you never know what you are going to get.
+    </h5>
+</section>
+
+</div></div>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer"><div class="inner"><div class="alignleft">
+  <p>
+  
+    &copy; 2019 Bob Zhang
+  
+  </p>
+  <p>
+    <a href="https://github.com/imbyron/hexo-theme-daisy">Theme</a> By <a href="http://googleyixia.com">Byron</a> based on <a href="https://github.com/willerce/hexo-theme-noderce">Noderce</a>.
+  </p>
+
+</div>
+<div class="clearfix"></div></div></footer>
+  <script type="text/javascript">
+
+</script>
+
+</body>
+</html>

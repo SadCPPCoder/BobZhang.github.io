@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Bob&#39;s Blogs › 自动喂鱼机</title>
+  <meta name="author" content="Bob Zhang">
+  
+  <meta name="description" content="Record the life and work.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="自动喂鱼机">
+  <meta property="og:site_name" content="Bob&#39;s Blogs">
+
+  
+    <meta property="og:image" content>
+  
+
+  <link href="/img/BZLogo.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Bob&#39;s Blogs" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-5353535-6']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+</html>
+
+<body>
+  <header id="header"><div class="meta inner">
+  <h1><a href="/">Bob&#39;s Blogs</a></h1>
+  <h2 id="header-h2">一切伟大的思想和行动，都有一个微不足道的开始。</h2>
+  <nav id="main-nav">
+    <ul>
+      
+      <li><a href="/">首页</a></li>
+      
+      <li><a href="/archives">文章归档</a></li>
+      
+      <li><a href="https://github.com/SadCPPCoder">Git</a></li>
+      
+      <li><a href="http://www.cplusplus.com/">友情链接</a></li>
+      
+      <li><a href="/about">关于</a></li>
+      
+      <img class="round_logo" src="/img/user_icon.jpg">
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+</div>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title">自动喂鱼机</h1>
+  
+
+      
+      <time datetime="2019-03-05T14:10:15.000Z">2019-03-05</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h1 id="自动喂鱼机"><a href="#自动喂鱼机" class="headerlink" title="自动喂鱼机"></a>自动喂鱼机</h1><p>自从上次成功驱动了报废光驱上拆下来的步进电机后，就一直想做一个能够自动定时喂鱼的装置，解决我周末或者长假回老家后鱼缸没人照料的窘境。一旦连续两天不喂食，那么必有最弱小的一条鱼会被啃得面目全非，所以我急需这样一个装置。<br>所有有志者事竟成，一切伟大的思想和行动都有一个微不足道的开始，最终还是让我把这样一个“产品”给做出来了，先不多说了，上一张图来看看。</p>
+<img src="/2019/03/05/自动喂鱼机/feeder.gif">
+<p>下面详细讲解下实现的过程吧。<br><a id="more"></a></p>
+<h1 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h1><p>通过上面的动图，能够看出这个装置其实主要分为四个部分：</p>
+<img src="/2019/03/05/自动喂鱼机/feeder.png">
+<ol>
+<li>饲料仓库</li>
+<li>电机模块</li>
+<li>电机驱动</li>
+<li>主控板</li>
+</ol>
+<p>由主控板上的软件做好时间控制，在到达喂食时间点后，通过高低电平控制电机驱动板控制电机正转一定时长，使得饲料投放装置落下，饲料从出口落出，再控制电机反转，拉起饲料投放装置。</p>
+<h2 id="饲料存储"><a href="#饲料存储" class="headerlink" title="饲料存储"></a>饲料存储</h2><p>这个其实没有什么好说的，和整个装置的支撑架一样，都是手工制作的。</p>
+<img src="/2019/03/05/自动喂鱼机/feed_storage.png">
+<h2 id="电机"><a href="#电机" class="headerlink" title="电机"></a>电机</h2><p>电机是从报废了的光驱上拆下来的两相双极性步进电机，可以参考之前的文章 <a href="/2018/04/06/两相双极性步进电机驱动/" title="两相双极性步进电机驱动">两相双极性步进电机驱动</a>。</p>
+<img src="/2019/03/05/自动喂鱼机/motor.png">
+<h2 id="电机驱动板"><a href="#电机驱动板" class="headerlink" title="电机驱动板"></a>电机驱动板</h2><p>电机驱动板，是很久很久以前，大概12年的时候，做智能巡线小车的时候留下来的L293D驱动芯片，通过输入不同的电平组，可以驱动电压输出到不同的口以及方向。最多可以同时驱动两个直流电机，这里我直接拿来驱动这一个步进电机了。</p>
+<img src="/2019/03/05/自动喂鱼机/drive_board.png">
+<h2 id="主控板"><a href="#主控板" class="headerlink" title="主控板"></a>主控板</h2><p>主控板就更简单了，直接花了几块钱在淘宝淘的一个最小C51单片机系统。</p>
+<img src="/2019/03/05/自动喂鱼机/main_board.png">
+<h1 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h1><p>软件部分主要是使用了单片机的定时器来计时，然后到达指定时长后驱动电机正转反转，让饲料可以落下。</p>
+<h2 id="流程图："><a href="#流程图：" class="headerlink" title="流程图："></a>流程图：</h2><img src="/2019/03/05/自动喂鱼机/flowchart.png">
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p><a href="https://github.com/SadCPPCoder/FishFeeder/blob/master/code/stepper.c" target="_blank" rel="noopener">点击下载代码</a><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*****************************************************************</span></span><br><span class="line"><span class="comment">* File Name: stepper.c</span></span><br><span class="line"><span class="comment">* Description: This file is a stepper related function, includes</span></span><br><span class="line"><span class="comment">*             time controller, stepper controller, task controller.</span></span><br><span class="line"><span class="comment">* Date: 2018.11.14</span></span><br><span class="line"><span class="comment">* Author: Bob, Zhang</span></span><br><span class="line"><span class="comment">* E-mail: 156500117@qq.coom</span></span><br><span class="line"><span class="comment">*****************************************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;reg52.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">char</span> <span class="keyword">uint8_t</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">short</span> <span class="keyword">uint16_t</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="keyword">uint32_t</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">char</span> <span class="keyword">bool</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> false ( 0 )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> true  ( !false )</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// stepper pins</span></span><br><span class="line">sbit steperA = P1^<span class="number">0</span>;</span><br><span class="line">sbit steperB = P1^<span class="number">1</span>;</span><br><span class="line">sbit steperA_ = P1^<span class="number">2</span>;</span><br><span class="line">sbit steperB_ = P1^<span class="number">3</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// count for 1 ms</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TIMER_VAL_FOR_1MS (0xFC18)</span></span><br><span class="line"><span class="keyword">int</span> direction_change_flag = <span class="number">0x00</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">delay</span><span class="params">(<span class="keyword">int</span> aUs)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> us;</span><br><span class="line"></span><br><span class="line">    us = aUs;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(us--)</span><br><span class="line">    &#123;</span><br><span class="line">        i = <span class="number">11</span>;</span><br><span class="line">        <span class="keyword">while</span>(--i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// stepper left turn</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MotorLeft</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> i = <span class="number">3</span>;</span><br><span class="line">   </span><br><span class="line">    <span class="keyword">switch</span>( i-- )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">		    steperA = <span class="number">1</span>;</span><br><span class="line">		    steperA_ = <span class="number">0</span>;</span><br><span class="line">		    steperB = <span class="number">0</span>;</span><br><span class="line">		    steperB_ = <span class="number">0</span>;</span><br><span class="line">		    <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">		    steperA = <span class="number">0</span>;</span><br><span class="line">		    steperA_ = <span class="number">0</span>;</span><br><span class="line">		    steperB = <span class="number">1</span>;</span><br><span class="line">		    steperB_ = <span class="number">0</span>;</span><br><span class="line">		    <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">			steperA = <span class="number">0</span>;</span><br><span class="line">			steperA_ = <span class="number">1</span>;</span><br><span class="line">    		steperB = <span class="number">0</span>;</span><br><span class="line">	    	steperB_ = <span class="number">0</span>;</span><br><span class="line">		    <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">		    steperA = <span class="number">0</span>;</span><br><span class="line">		    steperA_ = <span class="number">0</span>;</span><br><span class="line">		    steperB = <span class="number">0</span>;</span><br><span class="line">		    steperB_ = <span class="number">1</span>;</span><br><span class="line">	    	<span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">		    <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    <span class="keyword">if</span>( <span class="number">-1</span> &gt;= i )</span><br><span class="line">        i = <span class="number">3</span>;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// stepper right turn</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MotorRight</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">   </span><br><span class="line">    <span class="keyword">switch</span>( i++ )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">		    steperA = <span class="number">1</span>;</span><br><span class="line">		    steperA_ = <span class="number">0</span>;</span><br><span class="line">		    steperB = <span class="number">0</span>;</span><br><span class="line">		    steperB_ = <span class="number">0</span>;</span><br><span class="line">		    <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">		    steperA = <span class="number">0</span>;</span><br><span class="line">		    steperA_ = <span class="number">0</span>;</span><br><span class="line">		    steperB = <span class="number">1</span>;</span><br><span class="line">		    steperB_ = <span class="number">0</span>;</span><br><span class="line">		    <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">			steperA = <span class="number">0</span>;</span><br><span class="line">			steperA_ = <span class="number">1</span>;</span><br><span class="line">    		steperB = <span class="number">0</span>;</span><br><span class="line">	    	steperB_ = <span class="number">0</span>;</span><br><span class="line">		    <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">		    steperA = <span class="number">0</span>;</span><br><span class="line">		    steperA_ = <span class="number">0</span>;</span><br><span class="line">		    steperB = <span class="number">0</span>;</span><br><span class="line">		    steperB_ = <span class="number">1</span>;</span><br><span class="line">	    	<span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">		    <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    <span class="keyword">if</span>( <span class="number">4</span> &lt;= i )</span><br><span class="line">        i = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// init timer</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitTimer</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	TMOD = <span class="number">0x01</span>;</span><br><span class="line">	TH0 = TIMER_VAL_FOR_1MS &gt;&gt; <span class="number">8</span>;	<span class="comment">// 1 ms</span></span><br><span class="line">	TL0 = TIMER_VAL_FOR_1MS &amp; <span class="number">0xFF</span>;</span><br><span class="line">	ET0 = <span class="number">0x01</span>;</span><br><span class="line">	EA = <span class="number">0x01</span>;</span><br><span class="line">	TR0 = <span class="number">0x01</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// state machine</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">uint8_t</span> <span class="keyword">task_state_t</span>; <span class="keyword">enum</span></span><br><span class="line">&#123;</span><br><span class="line">	TASK_STATE_INIT_TIMER_STATE=<span class="number">0</span>,</span><br><span class="line">	TASK_STATE_FEED_FISH_MOTOR_LEFT_STATE,</span><br><span class="line">	TASK_STATE_FEED_FISH_MOTOR_RIGHT_STATE,</span><br><span class="line">	TASK_STATE_WAIT_STATE,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FEED_FISH_TIME_PERIOD 3 <span class="comment">//( 8*60*60 ) // 8h</span></span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">uint32_t</span> feed_fish_period = FEED_FISH_TIME_PERIOD; <span class="comment">// 8h</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">uint32_t</span> feed_first_period = FEED_FISH_TIME_PERIOD + <span class="number">4</span>; <span class="comment">// 4s</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">uint32_t</span> feed_second_period = FEED_FISH_TIME_PERIOD + <span class="number">4</span> + <span class="number">4</span>; <span class="comment">// 4s</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">task_state_t</span> next_state = TASK_STATE_INIT_TIMER_STATE;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">TaskLoop</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">switch</span>(next_state)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">case</span> TASK_STATE_INIT_TIMER_STATE:</span><br><span class="line">			InitTimer();</span><br><span class="line">			next_state = TASK_STATE_WAIT_STATE;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> TASK_STATE_FEED_FISH_MOTOR_LEFT_STATE:</span><br><span class="line">            MotorLeft();</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> TASK_STATE_FEED_FISH_MOTOR_RIGHT_STATE:</span><br><span class="line">            MotorRight();</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> TASK_STATE_WAIT_STATE:</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">StateLoop</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">uint32_t</span> fedd_fish_time_count = FEED_FISH_TIME_PERIOD;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>( fedd_fish_time_count == feed_fish_period )</span><br><span class="line">	&#123;</span><br><span class="line">		next_state = TASK_STATE_FEED_FISH_MOTOR_LEFT_STATE;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>( fedd_fish_time_count == feed_first_period )</span><br><span class="line">	&#123;</span><br><span class="line">		next_state = TASK_STATE_FEED_FISH_MOTOR_RIGHT_STATE;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>( fedd_fish_time_count == feed_second_period )</span><br><span class="line">	&#123;</span><br><span class="line">		next_state = TASK_STATE_WAIT_STATE;</span><br><span class="line">		fedd_fish_time_count = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	++fedd_fish_time_count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// timer interrupt function</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STATE_CHECK_TIME ( 1000 )</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">TimerIrq</span><span class="params">( <span class="keyword">void</span> )</span> interrupt 1 <span class="keyword">using</span> 1</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">long</span> time_count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	++time_count;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// every second run once state check</span></span><br><span class="line">	<span class="keyword">if</span>( STATE_CHECK_TIME == time_count )</span><br><span class="line">	&#123;</span><br><span class="line">		StateLoop();</span><br><span class="line">		time_count = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	TH0 = TIMER_VAL_FOR_1MS &gt;&gt; <span class="number">8</span>;	<span class="comment">// 1 ms</span></span><br><span class="line">	TL0 = TIMER_VAL_FOR_1MS &amp; <span class="number">0xFF</span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">    <span class="keyword">do</span></span><br><span class="line">    &#123;</span><br><span class="line">		TaskLoop();</span><br><span class="line">        delay(<span class="number">100</span>);</span><br><span class="line">    &#125; <span class="keyword">while</span>( <span class="number">1</span> );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <footer>
+      <div class="alignleft">
+      
+  
+  <div class="categories">
+    <a href="/categories/技术/">技术</a>, <a href="/categories/技术/嵌入式/">嵌入式</a>, <a href="/categories/技术/嵌入式/C51/">C51</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/嵌入式/">嵌入式</a>, <a href="/tags/步进电机/">步进电机</a>, <a href="/tags/C51/">C51</a>
+  </div>
+
+      </div>
+      <div class="clearfix"></div>
+    </footer>
+    
+  </div>
+</article>
+
+
+<section id="tail">
+    <h3><a>Thank you for reading!</a></h3><br>
+    <h5>
+        一切伟大的思想和行动都有一个微不足道的开始。<br>
+        Any great thing in this world, always start with a small beginning.<br><br>
+        生活就像一盒巧克力，你永远不会知道下一块拿到的是哪个。<br>
+        Life is like a box of chocolates, you never know what you are going to get.
+    </h5>
+</section>
+
+</div></div>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer"><div class="inner"><div class="alignleft">
+  <p>
+  
+    &copy; 2019 Bob Zhang
+  
+  </p>
+  <p>
+    <a href="https://github.com/imbyron/hexo-theme-daisy">Theme</a> By <a href="http://googleyixia.com">Byron</a> based on <a href="https://github.com/willerce/hexo-theme-noderce">Noderce</a>.
+  </p>
+
+</div>
+<div class="clearfix"></div></div></footer>
+  <script type="text/javascript">
+
+</script>
+
+</body>
+</html>

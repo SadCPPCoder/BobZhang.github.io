@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Bob&#39;s Blogs › 嵌入式开发一个月随笔</title>
+  <meta name="author" content="Bob Zhang">
+  
+  <meta name="description" content="Record the life and work.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="嵌入式开发一个月随笔">
+  <meta property="og:site_name" content="Bob&#39;s Blogs">
+
+  
+    <meta property="og:image" content>
+  
+
+  <link href="/img/BZLogo.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Bob&#39;s Blogs" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-5353535-6']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+</html>
+
+<body>
+  <header id="header"><div class="meta inner">
+  <h1><a href="/">Bob&#39;s Blogs</a></h1>
+  <h2 id="header-h2">一切伟大的思想和行动，都有一个微不足道的开始。</h2>
+  <nav id="main-nav">
+    <ul>
+      
+      <li><a href="/">首页</a></li>
+      
+      <li><a href="/archives">文章归档</a></li>
+      
+      <li><a href="https://github.com/SadCPPCoder">Git</a></li>
+      
+      <li><a href="http://www.cplusplus.com/">友情链接</a></li>
+      
+      <li><a href="/about">关于</a></li>
+      
+      <img class="round_logo" src="/img/user_icon.jpg">
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+</div>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title">嵌入式开发一个月随笔</h1>
+  
+
+      
+      <time datetime="2016-09-21T10:48:13.000Z">2016-09-21</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h1 id="嵌入式开发一个月随笔"><a href="#嵌入式开发一个月随笔" class="headerlink" title="嵌入式开发一个月随笔"></a>嵌入式开发一个月随笔</h1><p>从事嵌入式开发已经有一月有余，平心而论，我还是比较喜欢嵌入式开发的，不仅因为其涉及面广可以学习到很多知识，而且嵌入式开发对动手能力要求比较高，让我不觉得无聊。</p>
+<p>工作以来了解了嵌入式开发的相关流程，也实际动手做了几个需求。过程中遇到了很多问题也解决了很多问题，下面一一道来。</p>
+<p>调试，纯软件开发的调试可能没那么麻烦，IDE都会集成好调试工具，就算不使用IDE，也可以单独使用调试工具进行调试，像gdb之类的。这些调试工具可以进行断点设定、单步调试、多步调试、监视内存值等等十分有用的调试手段。但是呢，到了嵌入式板级调试，现在我们就主要使用的串口打印的方法进行调试，调试起来十分麻烦，想多测几个值就必须多写几句打印语句，用起来十分繁琐（当然嵌入式板级调试也有方法可以实现高效的调试手段，比如ARM提供的调试器，JTAG等，但是我对这些都不了解，以后提升开发效率可以从这些地方入手）。<br><a id="more"></a><br>TW8836无RGB信号时的白画面问题，这是我接手的第一个问题，由于该项目换了显示器，现在显示器默认状态是背光高亮，这样人们就会看到白屏。在ACPH17中开机时，屏幕会有0.2s左右的白屏，导致用户看到的画面会有闪屏现象。一开始我是真的毫无头绪，后来知道了串口打印，就跟着开机流程中调用TW8836的函数一步步打印提示信息，这样大概熟悉了开机流程后，又跟着流程看代码，很多知识都不知道，所以是有点迷茫，好在最后在代码注释中发现了重要信息，一个过程会把TW8836设置为高阻态，同时关闭显示信号，所以此时屏幕接收不到信号，就以默认的情况显示，在此处增加了关闭背光的代码后，开机过程中就不会出现白屏现象，但是屏幕背光也一直处于关闭状态，因此还要添加背光打开的代码。在背光关闭后立刻打开背光是不行的，需要等到其他地方给8836输入信号，并且修改其高阻态后再打开背光，但是我并不知道具体打开的地方，因此在关闭背光后我增加了一个延时的过程，经过调试，发现延时100ms后屏幕不仅不会出现白闪，同时背光也能被打开，开机一切正常。</p>
+<p>ILLUMINATION电压值读取，通过处理器的引脚输入一个电压值，然后PC端下命令给处理器，处理器返回输入的电压值。这个需求还是比较好写的，只需要读取到ADC芯片中的寄存器得值，然后通过公式(电压值=参考电压的值/ADC分辨率*ADC寄存器的值)。</p>
+<p>FAN PWM读取，PC下命令后，返回duty cycle和frequence一开始是读取风扇的配置，然后返回数据。后来要求频率能够接受到外部输入，最先想到的是PWM输入模式，但是FAN PWM输入的引脚并没有PWM INPUT功能。最后通过求助，实现通过输入引脚的外部中断检测下降沿的次数，然后开一个一秒钟的任务来计算频率。PWM就是脉冲宽度调制，两个主要的参数是频率和占空比，频率是一秒钟信号的次数，占空比是每个信号中高电平所占的比例。通过高低电平有规律的交错就可以达到控制风扇速度的目的。</p>
+<p>现在我正在做的是使用TW8836的dongle来将图片资源刷入到SPI Flash中。可是使用dongle时却遇到了问题，一开始dongle能够正常连接，第二天开始就一直报找不到设备，询问了很多人也没找到原因，甚至换机台，换电脑都不行。我怀疑是芯片在我热拔插过程中烧坏了。目前正在等台湾公司给我寄新的板子。嵌入式出问题的原因也可能很多，最不好定位了，但是在反复验证过程中却可以不断练习自己的动手能力。问题原因可能要后续给出了。</p>
+<p>今天修改了风扇的pwm值，但是发给Sven后，他那边一直不能测到波形，但是我这边一直能测到，Sven使用的下载方法和测量方法与我一致。最后反复思考，他应该是没有插上风扇。实测插上风扇才有波形。</p>
+
+      
+    </div>
+    
+    <footer>
+      <div class="alignleft">
+      
+  
+  <div class="categories">
+    <a href="/categories/技术/">技术</a>, <a href="/categories/技术/随笔/">随笔</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/嵌入式/">嵌入式</a>, <a href="/tags/随笔/">随笔</a>
+  </div>
+
+      </div>
+      <div class="clearfix"></div>
+    </footer>
+    
+  </div>
+</article>
+
+
+<section id="tail">
+    <h3><a>Thank you for reading!</a></h3><br>
+    <h5>
+        一切伟大的思想和行动都有一个微不足道的开始。<br>
+        Any great thing in this world, always start with a small beginning.<br><br>
+        生活就像一盒巧克力，你永远不会知道下一块拿到的是哪个。<br>
+        Life is like a box of chocolates, you never know what you are going to get.
+    </h5>
+</section>
+
+</div></div>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer"><div class="inner"><div class="alignleft">
+  <p>
+  
+    &copy; 2019 Bob Zhang
+  
+  </p>
+  <p>
+    <a href="https://github.com/imbyron/hexo-theme-daisy">Theme</a> By <a href="http://googleyixia.com">Byron</a> based on <a href="https://github.com/willerce/hexo-theme-noderce">Noderce</a>.
+  </p>
+
+</div>
+<div class="clearfix"></div></div></footer>
+  <script type="text/javascript">
+
+</script>
+
+</body>
+</html>
